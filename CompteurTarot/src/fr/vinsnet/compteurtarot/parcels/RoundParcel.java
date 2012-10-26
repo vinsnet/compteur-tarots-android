@@ -2,9 +2,13 @@ package fr.vinsnet.compteurtarot.parcels;
 
 import java.util.List;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+import fr.vinsnet.compteurtarot.Utils;
+import fr.vinsnet.compteurtarot.activities.resultstrategy.ResultStrategy;
+import fr.vinsnet.compteurtarot.model.Bid;
 import fr.vinsnet.compteurtarot.model.Bonus;
 import fr.vinsnet.compteurtarot.model.PetitAuBout;
 import fr.vinsnet.compteurtarot.model.Player;
@@ -17,6 +21,7 @@ public class RoundParcel implements Parcelable {
 	private static final byte PaB_FOR_TAKERS = 1;
 	private static final byte PaB_FOR_DEFENDERS = 0;
 	private Round round;
+	private ResultStrategy resultStrategy;
 
 	public RoundParcel(Round round) {
 		this.round = round;
@@ -49,10 +54,12 @@ public class RoundParcel implements Parcelable {
 
 	private void writeBiddind(Parcel parcel, int flag) {
 		if (round.isUnsetBidding()) {
-			parcel.writeByte((byte) 0);
+			parcel.writeInt(0);
 		} else {
-			parcel.writeByte((byte) 1);
-			// TODO
+			Bid b = round.getBidding();
+			parcel.writeInt(b.getMultiply());
+			parcel.writeInt(b.getValue());
+			parcel.writeString(b.getName());
 		}
 
 	}
@@ -122,6 +129,7 @@ public class RoundParcel implements Parcelable {
 	public static RoundParcel roundFromParcel(Parcel source) {
 		Round round = new Round();
 		RoundParcel parcel = new RoundParcel(round);
+		parcel.readResultStrategy();
 		parcel.readId(source);
 		parcel.readBiddind(source);
 		parcel.readNbBoutsTakers(source);
@@ -132,6 +140,12 @@ public class RoundParcel implements Parcelable {
 		parcel.readPoignees(source);
 		parcel.readBonus(source);
 		return parcel;
+	}
+
+	private void readResultStrategy() {
+		// TODO Auto-generated method stub
+		Log.v(TAG,"readResultStrategy");
+		
 	}
 
 	private void readBonus(Parcel source) {
@@ -184,11 +198,13 @@ public class RoundParcel implements Parcelable {
 	}
 
 	private void readBiddind(Parcel source) {
-		byte isBiddingSet = source.readByte();
-		if (isBiddingSet == 0) {
+		int bidMultiply = source.readInt();
+		if (bidMultiply == 0) {
 			round.setbidding(null);
 		} else {
-			// TODO
+			int value = source.readInt();
+			String label = source.readString();
+			round.setbidding(new Bid(label, value, bidMultiply));
 		}
 	}
 
