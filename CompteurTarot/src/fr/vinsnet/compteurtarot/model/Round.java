@@ -3,8 +3,10 @@ package fr.vinsnet.compteurtarot.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.vinsnet.utils.ObjectWithId;
 
-public class Round {
+
+public class Round implements ObjectWithId {
 
 	private static final int NB_BOUTS = 3;
 	public static final int MAX_SCORE= 91;

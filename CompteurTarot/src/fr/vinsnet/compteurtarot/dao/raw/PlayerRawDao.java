@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.util.Log;
 import fr.vinsnet.compteurtarot.dao.PlayerDao;
 import fr.vinsnet.compteurtarot.model.Player;
+import fr.vinsnet.utils.ObjectWithId;
 
 public class PlayerRawDao extends BaseRawDao implements PlayerDao {
 
@@ -32,7 +33,6 @@ public class PlayerRawDao extends BaseRawDao implements PlayerDao {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		// TODO Auto-generated method stub
 		Log.v(TAG, "onCreate");
 
 		db.execSQL(PLAYER_TABLE_CREATE);
@@ -45,15 +45,7 @@ public class PlayerRawDao extends BaseRawDao implements PlayerDao {
 
 	}
 
-	public void ensureOrCreate(Player p, SQLiteDatabase db) {
-		Log.v(TAG, "ensureOrCreate");
-		if (p.getId() == 0) {
-			mergeOnContactIdOrCreate(p, db);
-		} else {
-			// TODO Ensure if exist ?
-		}
 
-	}
 
 	private void mergeOnContactIdOrCreate(Player p, SQLiteDatabase db) {
 		long id = findPlayerIdByContactId(p, db);
@@ -103,11 +95,7 @@ public class PlayerRawDao extends BaseRawDao implements PlayerDao {
 	}
 
 	private ContentValues getContentValues(Player p) {
-		// TODO Auto-generated method stub
 		ContentValues c = new ContentValues();
-		//if (p.getId() > 0) {
-		//	c.put(KEY_ID, p.getId());
-		//}
 		c.put(KEY_CONTACT_ID, p.getContactId());
 		c.put(KEY_CONTACT_URI, p.getContactUri().toString());
 		c.put(KEY_NAME, p.getName());
@@ -136,5 +124,13 @@ public class PlayerRawDao extends BaseRawDao implements PlayerDao {
 		}
 		return p;
 
+	}
+
+	@Override
+	protected void create(ObjectWithId o, SQLiteDatabase db) {
+		Log.v(TAG,"merge");
+
+		mergeOnContactIdOrCreate((Player) o, db);
+		
 	}
 }

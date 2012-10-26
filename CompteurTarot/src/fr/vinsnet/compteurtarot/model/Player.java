@@ -1,8 +1,9 @@
 package fr.vinsnet.compteurtarot.model;
 
+import fr.vinsnet.utils.ObjectWithId;
 import android.net.Uri;
 
-public class Player {
+public class Player implements ObjectWithId {
 
 	private long id;
 	private long contactId;

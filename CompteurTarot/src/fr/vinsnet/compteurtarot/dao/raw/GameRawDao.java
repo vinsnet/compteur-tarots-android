@@ -8,6 +8,8 @@ import android.util.Log;
 import fr.vinsnet.compteurtarot.dao.GameDao;
 import fr.vinsnet.compteurtarot.model.Game;
 import fr.vinsnet.compteurtarot.model.Player;
+import fr.vinsnet.compteurtarot.model.Round;
+import fr.vinsnet.utils.ObjectWithId;
 
 public class GameRawDao extends BaseRawDao implements GameDao {
 
@@ -26,32 +28,53 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 
 	private static final String TAG = "GameRawDao";
 
-	static final String JOINT_PLAYER_TABLE_NAME = "games_players";
+	private static final String JOIN_PLAYER_TABLE_NAME = "games_players";
+
+
+	private static final String JOIN_ROUND_TABLE_NAME = "games_rounds";;
 
 	private static final String KEY_ID_GAME = "id_game";
 
 	private static final String KEY_ID_PLAYER = "id_player";
+	private static final String KEY_ID_ROUND = "id_round";
 
 	private static final String GAME_PLAYER_TABLE_CREATE = "CREATE TABLE "
-			+ JOINT_PLAYER_TABLE_NAME + " (" + KEY_ID
+			+ JOIN_PLAYER_TABLE_NAME + " (" + KEY_ID
 			+ " integer primary key autoincrement, " + KEY_ID_GAME
 			+ " integer constraint fk_game references " + TABLE_NAME
 			+ " on delete cascade, " + KEY_ID_PLAYER
 			+ " integer constraint fk_player references "
 			+ PlayerRawDao.TABLE_NAME + " on delete restrict" +
 
-			");";;
+			");";
+	private static final String GAME_ROUND_TABLE_CREATE = "CREATE TABLE "
+			+ JOIN_ROUND_TABLE_NAME + " (" + KEY_ID
+			+ " integer primary key autoincrement, " + KEY_ID_GAME
+			+ " integer constraint fk_game references " + TABLE_NAME
+			+ " on delete cascade, " + KEY_ID_ROUND
+			+ " integer constraint fk_player references "
+			+ RoundRawDao.TABLE_NAME + " " +
+
+			");";
 
 	private PlayerRawDao playerDao;
+
+	private RoundRawDao roundDao;
 
 	GameRawDao(Context context) {
 		super(context);
 		playerDao = new PlayerRawDao(context);
+		roundDao = new RoundRawDao(context);
 	}
 
 	protected boolean definePlayerGameLink(Game g, Player p, SQLiteDatabase db) {
-		long k = db.insertOrThrow(JOINT_PLAYER_TABLE_NAME, KEY_ID,
-				getContentValues(g, p));
+		long k = db.insertOrThrow(JOIN_PLAYER_TABLE_NAME, KEY_ID,
+				getGamePlayerJoinValues(g, p));
+		return k > 0;
+	}
+	protected boolean defineRoundGameLink(Game g, Round r, SQLiteDatabase db) {
+		long k = db.insertOrThrow(JOIN_ROUND_TABLE_NAME, KEY_ID,
+				getGameRoundJoinValues(g, r));
 		return k > 0;
 	}
 
@@ -70,26 +93,32 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 
 	public boolean save(Game g) {
 
-		SQLiteDatabase db =null;
+		SQLiteDatabase db = null;
 		boolean insertFailed = false;
-		try{
-		db= this.getWritableDatabase();
-		db.beginTransaction();
+		try {
+			db = this.getWritableDatabase();
+			db.beginTransaction();
 
+			insertFailed |= !saveOrUpdateBaseGame(g, db);
+			cleanPlayerGameJoin(g, db);
+			for (Player p : g.getPlayers()) {
+				playerDao.ensureOrCreate(p, db);
+				insertFailed |= !definePlayerGameLink(g, p, db);
+			}
 
-		insertFailed |= !saveOrUpdateBaseGame(g, db);
-		cleanPlayerGameJoin(g, db);
-		for (Player p : g.getPlayers()) {
-			playerDao.ensureOrCreate(p, db);
-			insertFailed |= !definePlayerGameLink(g, p, db);
-		}
-		if (!insertFailed) {
-			db.setTransactionSuccessful();
-		} else {
-
-		}
-		db.endTransaction();
-		}catch(Throwable e){
+			for(Round r : g.getRounds()){
+				roundDao.ensureOrCreate(r, db);
+				insertFailed |= !defineRoundGameLink(g, r, db);
+		
+			}
+			
+			if (!insertFailed) {
+				db.setTransactionSuccessful();
+			} else {
+				Log.w(TAG,"transaction failed");
+			}
+			db.endTransaction();
+		} catch (Throwable e) {
 			Log.w(TAG, e.getMessage());
 		}
 		db.close();
@@ -97,10 +126,16 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 		return !insertFailed;
 	}
 
-	private ContentValues getContentValues(Game g, Player p) {
+	private ContentValues getGamePlayerJoinValues(Game g, Player p) {
 		ContentValues c = new ContentValues();
 		c.put(KEY_ID_GAME, g.getId());
 		c.put(KEY_ID_PLAYER, p.getId());
+		return c;
+	}
+	private ContentValues getGameRoundJoinValues(Game g, Round r) {
+		ContentValues c = new ContentValues();
+		c.put(KEY_ID_GAME, g.getId());
+		c.put(KEY_ID_PLAYER, r.getId());
 		return c;
 	}
 
@@ -108,7 +143,7 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 		if (g.getId() == 0) {
 			return;
 		}
-		db.delete(JOINT_PLAYER_TABLE_NAME, KEY_ID_GAME + "=?",
+		db.delete(JOIN_PLAYER_TABLE_NAME, KEY_ID_GAME + "=?",
 				new String[] { "" + g.getId() });
 
 	}
@@ -187,7 +222,7 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 		}
 		Cursor playerIds = null;
 		try {
-			playerIds = db.query(true, JOINT_PLAYER_TABLE_NAME,
+			playerIds = db.query(true, JOIN_PLAYER_TABLE_NAME,
 					new String[] { KEY_ID_PLAYER }, KEY_ID_GAME + "=?",
 					new String[] { "" + game.getId() }, null, null, null, null);
 
@@ -212,6 +247,7 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 		this.playerDao.onCreate(db);
 		db.execSQL(GAME_TABLE_CREATE);
 		db.execSQL(GAME_PLAYER_TABLE_CREATE);
+		db.execSQL(GAME_ROUND_TABLE_CREATE);
 
 		Log.v(TAG, "creation de la table game");
 	}
@@ -235,6 +271,13 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 			cursor.close();
 			db.close();
 		}
+	}
+
+	@Override
+	protected void create(ObjectWithId o, SQLiteDatabase db) {
+		// TODO Auto-generated method stub
+		Log.v(TAG,"mergeOrCreate");
+		
 	}
 
 }
