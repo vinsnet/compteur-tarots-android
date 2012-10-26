@@ -129,7 +129,6 @@ public class RoundParcel implements Parcelable {
 	public static RoundParcel roundFromParcel(Parcel source) {
 		Round round = new Round();
 		RoundParcel parcel = new RoundParcel(round);
-		parcel.readResultStrategy();
 		parcel.readId(source);
 		parcel.readBiddind(source);
 		parcel.readNbBoutsTakers(source);
@@ -142,11 +141,7 @@ public class RoundParcel implements Parcelable {
 		return parcel;
 	}
 
-	private void readResultStrategy() {
-		// TODO Auto-generated method stub
-		Log.v(TAG,"readResultStrategy");
-		
-	}
+
 
 	private void readBonus(Parcel source) {
 		int size = source.readInt();
