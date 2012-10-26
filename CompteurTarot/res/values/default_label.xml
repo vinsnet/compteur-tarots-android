@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="cv_photo_description">Photo du contact</string>
+    <string name="cv_name">Nom</string>
+</resources>

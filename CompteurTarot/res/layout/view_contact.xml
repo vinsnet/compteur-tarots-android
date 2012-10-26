@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fr.vinsnet.compteurtarot.views.ContactView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contactview"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    class="fr.vinsnet.compteurtarot.views.ContactView" >
+ 		
+    <ImageView
+        android:contentDescription="@string/cv_photo_description"
+        android:id="@+id/cv_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/cv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="24dp"
+        android:text="@string/cv_name"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</fr.vinsnet.compteurtarot.views.ContactView>
+    	
+   
+       
+
+

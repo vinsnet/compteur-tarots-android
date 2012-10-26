@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="bidName">
+        <item >Petite</item>
+        <item >Garde</item>
+        <item >Garde Sans</item>
+        <item >Garde Contre</item>
+    </string-array>
+    
+</resources>

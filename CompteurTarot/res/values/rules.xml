@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="bidName">
+        <item >Small</item>
+        <item >Guard</item>
+        <item >Guard Without</item>
+        <item >Guard Against</item>
+    </string-array>
+    <integer-array name="bidValue">
+        <item >20</item>
+        <item >50</item>
+        <item >100</item>
+        <item >200</item>
+    </integer-array>
+    <integer-array name="bidMultiply">
+        <item >1</item>
+        <item >2</item>
+        <item >4</item>
+        <item >6</item>
+    </integer-array>
+    
+   
+</resources>

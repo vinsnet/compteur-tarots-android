@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fr.vinsnet.compteurtarot.views.ChoosePlayerDialog xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dcp_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/cpd_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <GridView
+        android:id="@+id/cpd_player_grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnWidth="80dp"
+        android:numColumns="auto_fit" >
+
+    </GridView>
+
+</fr.vinsnet.compteurtarot.views.ChoosePlayerDialog>
