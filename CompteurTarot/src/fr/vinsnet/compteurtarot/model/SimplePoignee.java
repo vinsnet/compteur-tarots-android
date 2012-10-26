@@ -13,6 +13,10 @@ public class SimplePoignee extends Poignee {
 	public SimplePoignee(Player player) {
 		this(0,player);
 	}
+	public SimplePoignee() {
+		this(null);
+	}
+	
 
 	@Override
 	public int getType() {

@@ -128,6 +128,19 @@ public class Round {
 		return bidding==null;
 	}
 
+	/**
+	 * ask to all FuturPlayers to be loaded
+	 */
+	public void loadPlayers() {
+		List<Player> players = new ArrayList<Player>(getDefenders()) ;
+		players.addAll(getTakers());
+		
+		for( Poignee p : getPoignees()){
+			p.getPlayer().loadWithPlayers(players);
+		}
+		
+	}
+
 
 	
 	

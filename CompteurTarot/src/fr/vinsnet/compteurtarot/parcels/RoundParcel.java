@@ -109,7 +109,7 @@ public class RoundParcel implements Parcelable {
 		List<Poignee> poignees = round.getPoignees();
 		parcel.writeInt(poignees.size());
 		for (Poignee p : poignees) {
-			// TODO
+			new PoigneeParcel(p).writeToParcel(parcel, flag);
 		}
 
 	}
@@ -138,6 +138,8 @@ public class RoundParcel implements Parcelable {
 		parcel.readPetitAuBout(source);
 		parcel.readPoignees(source);
 		parcel.readBonus(source);
+		
+		round.loadPlayers();
 		return parcel;
 	}
 
@@ -153,8 +155,12 @@ public class RoundParcel implements Parcelable {
 	private void readPoignees(Parcel source) {
 		int size = source.readInt();
 		for (int i = 0; i < size; i++) {
-			// TODO
+			round.getPoignees().add(readPoignee(source));
 		}
+	}
+
+	private Poignee readPoignee(Parcel source) {
+		return PoigneeParcel.poigneeFromParcel(source).getPoignee();
 	}
 
 	private void readPetitAuBout(Parcel source) {

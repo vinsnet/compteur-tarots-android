@@ -13,6 +13,10 @@ public class DoublePoignee extends Poignee {
 		this(0,player);
 	}
 
+	public DoublePoignee() {
+		this(null);
+	}
+
 	@Override
 	public int getType() {
 		return TYPE;
