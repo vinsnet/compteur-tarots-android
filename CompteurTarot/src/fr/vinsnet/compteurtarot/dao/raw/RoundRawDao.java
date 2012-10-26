@@ -4,10 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import fr.vinsnet.compteurtarot.dao.RoundDao;
 import fr.vinsnet.compteurtarot.model.Round;
 import fr.vinsnet.utils.ObjectWithId;
 
-public class RoundRawDao extends BaseRawDao {
+public class RoundRawDao extends BaseRawDao implements RoundDao {
 
 	private static final String TAG = "RoundRawDao";
 	public static final String TABLE_NAME = "rounds";
