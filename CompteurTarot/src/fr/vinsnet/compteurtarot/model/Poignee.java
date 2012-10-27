@@ -1,5 +1,6 @@
 package fr.vinsnet.compteurtarot.model;
 
+
 public abstract class Poignee {
 
 	public Poignee(long id,Player player ) {
@@ -13,6 +14,10 @@ public abstract class Poignee {
 	private long id;
 	
 	
+	public long getId() {
+		return id;
+	}
+	
 	public void setPlayer(Player p) {
 		this.player = p;
 		
@@ -25,5 +30,9 @@ public abstract class Poignee {
 	public  abstract int  getType();
 
 	public abstract String getLabel();
+
+	public void setId(long id) {
+		this.id=id;
+	}
 
 }

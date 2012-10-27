@@ -7,6 +7,7 @@ import java.util.Map;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
 import fr.vinsnet.compteurtarot.R;
 import fr.vinsnet.compteurtarot.model.Bid;
 import fr.vinsnet.compteurtarot.model.Bonus;
@@ -167,6 +168,8 @@ public abstract class CommunResultStrategy implements ResultStrategy {
 		int contract = getContract();
 		return getRound().getScoreTakers()>=contract;
 	}
+	
+
 	
 	public List<Bid> getBidList(Context context) {
 		Resources res = context.getResources();

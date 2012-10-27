@@ -13,6 +13,10 @@ public class Penalty extends Bonus {
 		this(0, player);
 	}
 	
+	public Penalty() {
+		this(null);
+	}
+
 	@Override
 	public int getType() {
 		return TYPE;

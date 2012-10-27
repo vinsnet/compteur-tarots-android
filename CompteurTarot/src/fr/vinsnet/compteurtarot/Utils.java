@@ -6,6 +6,8 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.util.Log;
 import android.view.LayoutInflater;
 import fr.vinsnet.compteurtarot.activities.AddRoundActivity;
 import fr.vinsnet.compteurtarot.activities.ChooseContactActivity;
@@ -19,6 +21,7 @@ import fr.vinsnet.compteurtarot.activities.resultstrategy.ResultStrategy;
 import fr.vinsnet.compteurtarot.adapters.AddButtonMenuItem;
 import fr.vinsnet.compteurtarot.dao.GameDao;
 import fr.vinsnet.compteurtarot.dao.raw.RawDaoFactory;
+import fr.vinsnet.compteurtarot.model.Bid;
 import fr.vinsnet.compteurtarot.model.Game;
 import fr.vinsnet.compteurtarot.model.Player;
 import fr.vinsnet.compteurtarot.model.Round;
@@ -39,6 +42,8 @@ public class Utils {
 	public static final int DIALOG_CHOOSE_PLAYER = R.layout.dialog_choose_player;
 
 	public static final int NEW_ROUND_REQUEST_CODE = 1;
+
+	private static final String TAG = "UTILS";
 
 
 	
@@ -144,6 +149,8 @@ public class Utils {
 		
 		
 	}
+
+
 
 
 	

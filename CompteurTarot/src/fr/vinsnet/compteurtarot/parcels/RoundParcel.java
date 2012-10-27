@@ -5,6 +5,7 @@ import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+import fr.vinsnet.compteurtarot.model.Bid;
 import fr.vinsnet.compteurtarot.model.Bonus;
 import fr.vinsnet.compteurtarot.model.PetitAuBout;
 import fr.vinsnet.compteurtarot.model.Player;
@@ -49,10 +50,12 @@ public class RoundParcel implements Parcelable {
 
 	private void writeBiddind(Parcel parcel, int flag) {
 		if (round.isUnsetBidding()) {
-			parcel.writeByte((byte) 0);
+			parcel.writeInt(0);
 		} else {
-			parcel.writeByte((byte) 1);
-			// TODO
+			Bid b = round.getBidding();
+			parcel.writeInt(b.getMultiply());
+			parcel.writeInt(b.getValue());
+			parcel.writeString(b.getName());
 		}
 
 	}
@@ -89,7 +92,7 @@ public class RoundParcel implements Parcelable {
 			parcel.writeByte((byte) 1);
 			if (round.getPetitAuBout().isForTakers()) {
 				parcel.writeByte((byte) PaB_FOR_TAKERS);
-			}else {
+			} else {
 				parcel.writeByte((byte) PaB_FOR_DEFENDERS);
 			}
 		} else {
@@ -102,7 +105,7 @@ public class RoundParcel implements Parcelable {
 		List<Poignee> poignees = round.getPoignees();
 		parcel.writeInt(poignees.size());
 		for (Poignee p : poignees) {
-			// TODO
+			new PoigneeParcel(p).writeToParcel(parcel, flag);
 		}
 
 	}
@@ -111,7 +114,7 @@ public class RoundParcel implements Parcelable {
 		List<Bonus> bonus = round.getBonus();
 		parcel.writeInt(bonus.size());
 		for (Bonus b : bonus) {
-			// TODO
+			new BonusParcel(b).writeToParcel(parcel, flag);
 		}
 	}
 
@@ -131,28 +134,40 @@ public class RoundParcel implements Parcelable {
 		parcel.readPetitAuBout(source);
 		parcel.readPoignees(source);
 		parcel.readBonus(source);
+
+		round.loadPlayers();
 		return parcel;
 	}
 
 	private void readBonus(Parcel source) {
 		int size = source.readInt();
 		for (int i = 0; i < size; i++) {
-			// TODO
+			round.getBonus().add(readOneBonus(source));
 		}
+	}
+
+	private Bonus readOneBonus(Parcel source) {
+		Log.v(TAG, "readOneBonus");
+		return BonusParcel.bonusFromParcel(source).getBonus();
 	}
 
 	private void readPoignees(Parcel source) {
 		int size = source.readInt();
 		for (int i = 0; i < size; i++) {
-			// TODO
+			round.getPoignees().add(readPoignee(source));
 		}
+	}
+
+	private Poignee readPoignee(Parcel source) {
+		return PoigneeParcel.poigneeFromParcel(source).getPoignee();
 	}
 
 	private void readPetitAuBout(Parcel source) {
 
-		boolean isPetitAuBout = source.readByte()!=0;
-		if(isPetitAuBout){
-			round.setPetitAuBout(new PetitAuBout(source.readByte()==PaB_FOR_TAKERS));
+		boolean isPetitAuBout = source.readByte() != 0;
+		if (isPetitAuBout) {
+			round.setPetitAuBout(new PetitAuBout(
+					source.readByte() == PaB_FOR_TAKERS));
 		}
 
 	}
@@ -184,11 +199,13 @@ public class RoundParcel implements Parcelable {
 	}
 
 	private void readBiddind(Parcel source) {
-		byte isBiddingSet = source.readByte();
-		if (isBiddingSet == 0) {
+		int bidMultiply = source.readInt();
+		if (bidMultiply == 0) {
 			round.setbidding(null);
 		} else {
-			// TODO
+			int value = source.readInt();
+			String label = source.readString();
+			round.setbidding(new Bid(label, value, bidMultiply));
 		}
 	}
 

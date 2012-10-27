@@ -1,14 +1,28 @@
 package fr.vinsnet.compteurtarot.model;
 
+
 import fr.vinsnet.utils.ObjectWithId;
+
+import java.util.List;
+
+import fr.vinsnet.compteurtarot.model.futur.OnPlayerLoaded;
+
 import android.net.Uri;
 
-public class Player implements ObjectWithId {
+
+public class Player implements OnPlayerLoaded,ObjectWithId  {
+
 
 	private long id;
 	private long contactId;
 	private String name;
 	private Uri contactUri;
+	
+	
+
+	public void loadWithPlayers(List<Player> g) {
+	}
+	
 	
 	
 	public long getId() {
@@ -35,5 +49,6 @@ public class Player implements ObjectWithId {
 	public void setContactUri(Uri contactUri) {
 		this.contactUri = contactUri;
 	}
+
 	
 }

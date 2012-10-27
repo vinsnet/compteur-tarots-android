@@ -11,6 +11,10 @@ public class TriplePoignee extends Poignee {
 		this(0,player);
 	}
 
+	public TriplePoignee() {
+		this(null);
+	}
+
 	@Override
 	public int getType() {
 		return TYPE;
