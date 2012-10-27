@@ -55,11 +55,20 @@ public class DisplayScoreActivity extends Activity {
 public void onContentChanged() {
 		createHeader();
 		updateAddRoundButton();
+		updateScore();
 	}
+
+	private void updateScore() {
+	// TODO Auto-generated method stub
+	Log.v(TAG,"updateScore");
+	
+}
 
 	private void updateAddRoundButton() {
 		if(currentRound==null){
-			//TODO
+			getAddRoundButton().setText(R.string.dsa_addRound);
+		}else{
+			getAddRoundButton().setText(R.string.dsa_returnToRound);
 		}
 	}
 

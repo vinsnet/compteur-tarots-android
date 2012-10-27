@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="addRound"
-            android:text="@string/dsa_addRound_button" />
+            android:text="@string/dsa_addRound" />
 
     </LinearLayout>
 

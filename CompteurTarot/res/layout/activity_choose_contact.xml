@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="addContact"
-            android:text="@string/cca_add_player_button" />
+            android:text="@string/cca_add_player" />
 
         <Button
             android:id="@+id/cca_startGame_button"
@@ -26,7 +26,7 @@
             android:clickable="false"
             android:enabled="false"
             android:onClick="startGame"
-            android:text="@string/cca_start_game_button" />
+            android:text="@string/cca_start_game" />
 
     </LinearLayout>
 
