@@ -138,6 +138,9 @@ public class Round {
 		for( Poignee p : getPoignees()){
 			p.getPlayer().loadWithPlayers(players);
 		}
+		for( Bonus b : getBonus()){
+			b.getPlayer().loadWithPlayers(players);
+		}
 		
 	}
 

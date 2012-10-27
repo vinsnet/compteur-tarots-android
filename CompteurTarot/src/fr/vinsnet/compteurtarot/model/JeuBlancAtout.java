@@ -10,7 +10,11 @@ public class JeuBlancAtout extends JeuBlanc {
 		this(0,player);
 	}
 
-	private static final int TYPE = 2;
+	public JeuBlancAtout() {
+		this(null);
+	}
+
+	public static final int TYPE = 2;
 
 	@Override
 	public int getType() {

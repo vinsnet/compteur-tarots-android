@@ -28,6 +28,9 @@ public Player getPlayer() {
 public void setPlayer(Player player) {
 	this.player = player;
 }
+
+
+
 public abstract int getType();
 public abstract String getLabel();
  

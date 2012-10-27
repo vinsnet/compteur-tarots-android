@@ -2,12 +2,9 @@ package fr.vinsnet.compteurtarot.parcels;
 
 import java.util.List;
 
-import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
-import fr.vinsnet.compteurtarot.Utils;
-import fr.vinsnet.compteurtarot.activities.resultstrategy.ResultStrategy;
 import fr.vinsnet.compteurtarot.model.Bid;
 import fr.vinsnet.compteurtarot.model.Bonus;
 import fr.vinsnet.compteurtarot.model.PetitAuBout;
@@ -21,7 +18,6 @@ public class RoundParcel implements Parcelable {
 	private static final byte PaB_FOR_TAKERS = 1;
 	private static final byte PaB_FOR_DEFENDERS = 0;
 	private Round round;
-	private ResultStrategy resultStrategy;
 
 	public RoundParcel(Round round) {
 		this.round = round;
@@ -96,7 +92,7 @@ public class RoundParcel implements Parcelable {
 			parcel.writeByte((byte) 1);
 			if (round.getPetitAuBout().isForTakers()) {
 				parcel.writeByte((byte) PaB_FOR_TAKERS);
-			}else {
+			} else {
 				parcel.writeByte((byte) PaB_FOR_DEFENDERS);
 			}
 		} else {
@@ -118,7 +114,7 @@ public class RoundParcel implements Parcelable {
 		List<Bonus> bonus = round.getBonus();
 		parcel.writeInt(bonus.size());
 		for (Bonus b : bonus) {
-			// TODO
+			new BonusParcel(b).writeToParcel(parcel, flag);
 		}
 	}
 
@@ -138,18 +134,21 @@ public class RoundParcel implements Parcelable {
 		parcel.readPetitAuBout(source);
 		parcel.readPoignees(source);
 		parcel.readBonus(source);
-		
+
 		round.loadPlayers();
 		return parcel;
 	}
 
-
-
 	private void readBonus(Parcel source) {
 		int size = source.readInt();
 		for (int i = 0; i < size; i++) {
-			// TODO
+			round.getBonus().add(readOneBonus(source));
 		}
+	}
+
+	private Bonus readOneBonus(Parcel source) {
+		Log.v(TAG, "readOneBonus");
+		return BonusParcel.bonusFromParcel(source).getBonus();
 	}
 
 	private void readPoignees(Parcel source) {
@@ -165,9 +164,10 @@ public class RoundParcel implements Parcelable {
 
 	private void readPetitAuBout(Parcel source) {
 
-		boolean isPetitAuBout = source.readByte()!=0;
-		if(isPetitAuBout){
-			round.setPetitAuBout(new PetitAuBout(source.readByte()==PaB_FOR_TAKERS));
+		boolean isPetitAuBout = source.readByte() != 0;
+		if (isPetitAuBout) {
+			round.setPetitAuBout(new PetitAuBout(
+					source.readByte() == PaB_FOR_TAKERS));
 		}
 
 	}
