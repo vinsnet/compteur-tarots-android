@@ -8,7 +8,7 @@
     <string name="ma_erase_data">Effacer toutes les données</string>
     <string name="dsa_title">Partie en cours</string>
     <string name="dsa_addRound">Ajouter 1 manche</string>
-    <string name="dsa_returnToRound">Ajouter 1 manche</string>
+    <string name="dsa_returnToRound">Retour à la manche</string>
     <string name="cca_title">Choisir un joueur</string>
     <string name="cca_add_player">Ajouter un joueur</string>
     <string name="cca_start_game">Jouer la partie</string>
