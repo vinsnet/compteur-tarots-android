@@ -27,9 +27,10 @@ public class DisplayScoreActivity extends Activity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         currentGame = Utils.getCurrentGame(this);
+        
         setContentView(R.layout.activity_display_score);
+        
         Log.v(TAG,"childcount :"+getHeader().getChildCount());
         
     }
@@ -54,15 +55,23 @@ public class DisplayScoreActivity extends Activity {
 @Override
 public void onContentChanged() {
 		createHeader();
-		updateAddRoundButton();
+		//updateAddRoundButton();
 		updateScore();
+		super.onContentChanged();
 	}
 
 	private void updateScore() {
-	// TODO Auto-generated method stub
-	Log.v(TAG,"updateScore");
+		ViewGroup roundScorePanel = getRoundScorePanelView();
+		roundScorePanel.removeAllViews();
+		for(Round r : currentGame.getRounds()){
+			//TODO
+		}
 	
 }
+
+	private ViewGroup getRoundScorePanelView() {
+		return (ViewGroup) findViewById(R.id.dsa_round_score_panel);
+	}
 
 	private void updateAddRoundButton() {
 		if(currentRound==null){
