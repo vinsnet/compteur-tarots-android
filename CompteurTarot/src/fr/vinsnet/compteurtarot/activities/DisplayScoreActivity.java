@@ -55,7 +55,7 @@ public class DisplayScoreActivity extends Activity {
 @Override
 public void onContentChanged() {
 		createHeader();
-		//updateAddRoundButton();
+		updateAddRoundButton();
 		updateScore();
 		super.onContentChanged();
 	}
