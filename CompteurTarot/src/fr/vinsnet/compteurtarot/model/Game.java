@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import fr.vinsnet.compteurtarot.Utils;
-import fr.vinsnet.compteurtarot.activities.resultstrategy.ResultStrategy;
+import fr.vinsnet.compteurtarot.activities.strategies.calcutateresult.ResultStrategy;
 
 import android.util.Log;
 

@@ -1,4 +1,4 @@
-package fr.vinsnet.compteurtarot.activities.resultstrategy;
+package fr.vinsnet.compteurtarot.activities.strategies.calcutateresult;
 
 import java.util.ArrayList;
 import java.util.HashMap;

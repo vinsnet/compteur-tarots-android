@@ -1,4 +1,4 @@
-package fr.vinsnet.compteurtarot.activities.resultstrategy;
+package fr.vinsnet.compteurtarot.activities.strategies.calcutateresult;
 
 import fr.vinsnet.compteurtarot.model.Bid;
 import fr.vinsnet.compteurtarot.model.PetitAuBout;
