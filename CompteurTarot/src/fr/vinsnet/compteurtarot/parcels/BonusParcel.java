@@ -9,9 +9,9 @@ import fr.vinsnet.compteurtarot.model.JeuBlancTete;
 import fr.vinsnet.compteurtarot.model.Penalty;
 import fr.vinsnet.compteurtarot.model.futur.FuturPlayer;
 
-public class BonusParcel implements Parcelable {
+public class BonusParcel extends WithFuturPlayer implements Parcelable {
 
-	private static final String TAG = "BonusParcel";
+	static final String TAG = "BonusParcel";
 	private Bonus bonus;
 
 	public BonusParcel(Bonus b) {
@@ -22,11 +22,11 @@ public class BonusParcel implements Parcelable {
 		return bonus;
 	}
 
-	public void writeToParcel(Parcel source, int flag) {
+	public void writeToParcel(Parcel dest, int flag) {
 		Log.v(TAG, "writeToParcel");
-		source.writeInt(bonus.getType());
-		source.writeLong(bonus.getId());
-		source.writeLong(bonus.getPlayer().getId());
+		dest.writeInt(bonus.getType());
+		dest.writeLong(bonus.getId());
+		writeFuturePlayer(dest,bonus.getPlayer());
 		//source.writeInt(bonus.getValue());
 	}
 
@@ -35,13 +35,13 @@ public class BonusParcel implements Parcelable {
 		
 		Bonus b = readBonusType(source);
 		readId(b, source);
-		readPlayer(b, source);
+		readFuturPlayer(b, source);
 		
 		return new BonusParcel(b);
 	}
 
-	protected static void readPlayer(Bonus b, Parcel source) {
-		b.setPlayer(new FuturPlayer(source.readLong()));
+	protected static void readFuturPlayer(Bonus b, Parcel source) {
+		b.setPlayer(WithFuturPlayer.readFuturPlayer(source));
 		
 	}
 

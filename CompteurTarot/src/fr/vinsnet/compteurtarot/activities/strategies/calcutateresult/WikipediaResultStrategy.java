@@ -1,15 +1,18 @@
 package fr.vinsnet.compteurtarot.activities.strategies.calcutateresult;
 
+import java.util.List;
+
 import fr.vinsnet.compteurtarot.model.Bid;
 import fr.vinsnet.compteurtarot.model.PetitAuBout;
+import fr.vinsnet.compteurtarot.model.Player;
 import fr.vinsnet.compteurtarot.model.Round;
 
 public class WikipediaResultStrategy  extends CommunResultStrategy {
 
 	private static int CONTRACT_VALUE = 25;
 
-	public WikipediaResultStrategy(Round round) {
-		super(round);
+	public WikipediaResultStrategy(Round round, List<Player> players) {
+		super(round,players);
 	}
 
 	@Override

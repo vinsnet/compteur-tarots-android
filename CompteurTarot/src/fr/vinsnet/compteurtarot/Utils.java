@@ -69,13 +69,15 @@ public class Utils {
 				.getParcelable(CURRENT_GAME_PARCEL_NAME)).getGame();
 	}
 	
-	public static Round getCurrentRound(Activity a) {
-		return  getCurrentRound(a.getIntent());
+	public static Round getCurrentRound(Activity a, List<Player> players) {
+		return  getCurrentRound(a.getIntent(),players);
 	}
 	
-	public static Round getCurrentRound(Intent intent){
-		return ((RoundParcel) intent.getExtras()
+	public static Round getCurrentRound(Intent intent, List<Player> players){
+		Round round = ((RoundParcel) intent.getExtras()
 				.getParcelable(CURRENT_ROUND_PARCEL_NAME)).getRound();
+		 round.loadPlayers(players);
+		return round;
 	}
 
 	public static void displayNewRound(Activity c, Game game,Round round) {
@@ -93,7 +95,7 @@ public class Utils {
 	public static FillRoundStrategy getCurrentScoreStrategy(Activity a,
 			FillRoundStrategy.Actionable actionable) {
 		Game game = getCurrentGame(a);
-		Round round = getCurrentRound(a);
+		Round round = getCurrentRound(a,game.getPlayers());
 		switch (game.getPlayers().size()) {
 		case 3:
 			return new ThreePlayersFillRoundStrategy(game, round, actionable);
@@ -124,9 +126,9 @@ public class Utils {
 		return RawDaoFactory.getInstance().getGameDao(context);
 	}
 
-	public static ResultStrategy getNewDefaultResultStrategy(Round round) {
+	public static ResultStrategy getNewDefaultResultStrategy(Round round,List<Player> players) {
 		//$return new WikipediaResultStrategy(round);
-		return new MeloResultStrategy(round);
+		return new MeloResultStrategy(round,players);
 	}
 
 	public static List<AddButtonMenuItem> getAddButtonItems(AddRoundActivity a) {

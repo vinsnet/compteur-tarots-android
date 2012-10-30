@@ -1,14 +1,18 @@
 package fr.vinsnet.compteurtarot.activities.strategies.calcutateresult;
 
+import java.util.List;
+
+import fr.vinsnet.compteurtarot.R.string;
 import fr.vinsnet.compteurtarot.model.Bid;
 import fr.vinsnet.compteurtarot.model.PetitAuBout;
+import fr.vinsnet.compteurtarot.model.Player;
 import fr.vinsnet.compteurtarot.model.Round;
 
 public class MeloResultStrategy extends CommunResultStrategy {
 
 	
-	public MeloResultStrategy(Round round) {
-		super(round);
+	public MeloResultStrategy(Round round, List<Player> players) {
+		super(round,players);
 	}
 
 	@Override
@@ -36,7 +40,8 @@ public class MeloResultStrategy extends CommunResultStrategy {
 	@Override
 	protected float getTotal() {
 		Bid b = getRound().getBidding();
-		return b.getValue()+getScore()+getPetitAuBoutScore()+getTotalPoignees();
+		
+		return (b==null?0:b.getValue())+getScore()+getPetitAuBoutScore()+getTotalPoignees();
 	}
 
 	@Override
@@ -47,7 +52,12 @@ public class MeloResultStrategy extends CommunResultStrategy {
 		if(totalPoignee!=0){
 			poignee=" + "+totalPoignee+" (poignee"+((getRound().getPoignees().size()>1)?"s":"")+")";
 		}
-		return ""+b.getValue()+"("+b.getName()+") + "+getScore()+"(de "+getSuperScore()+") + " +getPetitAuBoutComment() + poignee;
+		String bidComment = "";
+		if(b!=null){
+			bidComment=b.getValue()+"("+b.getName()+") + ";
+		}
+		String suffix = getPetitAuBoutComment() + poignee;
+		return bidComment+getScore()+"(de "+getSuperScore()+") "+(suffix.trim().length()>0 ? " + "+suffix:"");
 	}
 
 

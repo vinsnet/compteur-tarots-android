@@ -73,7 +73,7 @@ public class Game {
 
 
 	public ResultStrategy getNewResultStrategy(Round round) {
-		return Utils.getNewDefaultResultStrategy( round);
+		return Utils.getNewDefaultResultStrategy( round,players);
 	}
 
 	public void addRound(Round round) {

@@ -9,7 +9,7 @@ import fr.vinsnet.compteurtarot.model.SimplePoignee;
 import fr.vinsnet.compteurtarot.model.TriplePoignee;
 import fr.vinsnet.compteurtarot.model.futur.FuturPlayer;
 
-public class PoigneeParcel  implements Parcelable{
+public class PoigneeParcel extends WithFuturPlayer implements Parcelable{
 
 	static final String TAG = "PoigneeParcel";
 	private Poignee poignee;
@@ -26,7 +26,7 @@ public class PoigneeParcel  implements Parcelable{
 
 		parcel.writeInt(poignee.getType());
 		parcel.writeLong(poignee.getId());
-		parcel.writeLong(poignee.getPlayer().getId());
+		writeFuturePlayer(parcel, poignee.getPlayer());
 		
 	}
 
@@ -40,7 +40,7 @@ public class PoigneeParcel  implements Parcelable{
 	}
 
 	protected static void readPlayer(Poignee p, Parcel source) {
-		p.setPlayer(new FuturPlayer(source.readLong()));
+		p.setPlayer(WithFuturPlayer.readFuturPlayer(source));
 		
 	}
 

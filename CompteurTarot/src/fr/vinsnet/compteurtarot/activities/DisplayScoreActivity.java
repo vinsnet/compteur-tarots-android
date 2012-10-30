@@ -154,7 +154,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	if(requestCode==Utils.NEW_ROUND_REQUEST_CODE){
 		Log.v(TAG,"onActivityResult NEW_ROUND_REQUEST_CODE");
 		if (resultCode == AddRoundActivity.RESULT_NOT_FINISHED){
-			currentRound = Utils.getCurrentRound(data);
+			currentRound = Utils.getCurrentRound(data,this.currentGame.getPlayers());
 			onContentChanged();
 		}
 	}
