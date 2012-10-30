@@ -12,7 +12,7 @@ import fr.vinsnet.compteurtarot.model.Player;
 import fr.vinsnet.compteurtarot.model.Poignee;
 import fr.vinsnet.compteurtarot.model.Round;
 
-public class RoundParcel implements Parcelable {
+public class RoundParcel extends WithFuturPlayer implements Parcelable {
 
 	private static final String TAG = "RoundParcel";
 	private static final byte PaB_FOR_TAKERS = 1;
@@ -73,7 +73,7 @@ public class RoundParcel implements Parcelable {
 		List<Player> takers = round.getTakers();
 		parcel.writeInt(takers.size());
 		for (Player p : takers) {
-			new PlayerParcel(p).writeToParcel(parcel, flag);
+			writeFuturePlayer(parcel, p);
 		}
 	}
 
@@ -81,7 +81,7 @@ public class RoundParcel implements Parcelable {
 		List<Player> defenders = round.getDefenders();
 		parcel.writeInt(defenders.size());
 		for (Player p : defenders) {
-			new PlayerParcel(p).writeToParcel(parcel, flag);
+			writeFuturePlayer(parcel, p);
 		}
 
 	}
@@ -134,8 +134,6 @@ public class RoundParcel implements Parcelable {
 		parcel.readPetitAuBout(source);
 		parcel.readPoignees(source);
 		parcel.readBonus(source);
-
-		round.loadPlayers();
 		return parcel;
 	}
 
@@ -195,7 +193,7 @@ public class RoundParcel implements Parcelable {
 	}
 
 	protected Player readPlayer(Parcel source) {
-		return PlayerParcel.playerFromParcel(source).getPlayer();
+		return WithFuturPlayer.readFuturPlayer(source);
 	}
 
 	private void readBiddind(Parcel source) {

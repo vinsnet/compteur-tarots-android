@@ -1,4 +1,4 @@
-package fr.vinsnet.compteurtarot.activities.resultstrategy;
+package fr.vinsnet.compteurtarot.activities.strategies.calcutateresult;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,10 +21,13 @@ import fr.vinsnet.compteurtarot.model.TriplePoignee;
 import fr.vinsnet.compteurtarot.model.strategies.RoundResult;
 
 public abstract class CommunResultStrategy implements ResultStrategy {
+	private static final String TAG = "CommunResultStrategy";
 	private Round round;
+	private List<Player> players;
 
-	public CommunResultStrategy(Round round) {
+	public CommunResultStrategy(Round round,List<Player> players) {
 		this.setRound(round);
+		this.players = players;
 	}
 
 	public Round getRound() {
@@ -52,11 +55,21 @@ public abstract class CommunResultStrategy implements ResultStrategy {
 	private Map<Long, Float> getDetailedScores() {
 		Map<Long, Float> s = new HashMap<Long, Float>();
 		
+		dispatchPlayers(s);
+		
 		dispatchScore(s);
 		
 		dispatchBonus(s);
 		
 		return s;
+		
+	}
+
+	private void dispatchPlayers(Map<Long, Float> s) {
+		Log.v(TAG,"dispatchPlayers");
+		for(Player p : players){
+			s.put(p.getId(), (float) 0);
+		}
 		
 	}
 
@@ -76,10 +89,11 @@ public abstract class CommunResultStrategy implements ResultStrategy {
 	}
 	
 	protected int getNbPlayer(){
-		return getRound().getTakers().size()+ getRound().getDefenders().size();
+		return Math.min(players.size(),5);
 	}
 
 	private void dispatchScore(Map<Long, Float> s) {
+		if(!isResultAvaible())return;
 		float sign = isSuccess()?1:-1;
 		Round r = getRound();
 		for(Player p : r.getDefenders()){

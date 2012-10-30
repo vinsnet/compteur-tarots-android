@@ -1,4 +1,4 @@
-package fr.vinsnet.compteurtarot.activities.fillroundstrategy;
+package fr.vinsnet.compteurtarot.activities.strategies.fillround;
 
 import fr.vinsnet.compteurtarot.model.Game;
 import fr.vinsnet.compteurtarot.model.Round;

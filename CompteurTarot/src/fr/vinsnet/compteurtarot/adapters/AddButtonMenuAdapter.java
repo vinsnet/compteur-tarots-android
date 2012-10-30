@@ -8,8 +8,8 @@ import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import fr.vinsnet.compteurtarot.activities.fillroundstrategy.FillRoundStrategy;
-import fr.vinsnet.compteurtarot.activities.fillroundstrategy.FillRoundStrategy.Actionable;
+import fr.vinsnet.compteurtarot.activities.strategies.fillround.FillRoundStrategy;
+import fr.vinsnet.compteurtarot.activities.strategies.fillround.FillRoundStrategy.Actionable;
 import fr.vinsnet.utils.adapters.SimpleListAdapter;
 
 public class AddButtonMenuAdapter extends  SimpleListAdapter<AddButtonMenuItem>  implements DialogInterface.OnClickListener{

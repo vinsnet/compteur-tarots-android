@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="startNewGame"
-        android:text="@string/ma_new_game_button" />
+        android:text="@string/ma_new_game" />
 
     <Button
         android:id="@+id/ma_buttonRestoreGame"
@@ -22,7 +22,7 @@
         android:clickable="false"
         android:enabled="false"
         android:onClick="resumeGame"
-        android:text="@string/ma_restore_game_button" />
+        android:text="@string/ma_restore_game" />
 
     <Button
         android:id="@+id/ma_buttonDelete"
@@ -31,6 +31,6 @@
         android:clickable="true"
         android:enabled="true"
         android:onClick="eraseData"
-        android:text="@string/ma_erase_data_button" />
+        android:text="@string/ma_erase_data" />
 
 </LinearLayout>

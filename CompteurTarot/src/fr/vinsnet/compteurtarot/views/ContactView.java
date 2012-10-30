@@ -14,41 +14,41 @@ public class ContactView extends RelativeLayout   {
 	
 	private Player player;
 
-	public ContactView(Context context,Player p, AttributeSet attrs, int defStyle) {
+	/*public ContactView(Context context,Player p, AttributeSet attrs, int defStyle) {
 		super(context, attrs,defStyle);
-		this.player=p;
+		setPlayer(p);
 	}
 
 	public ContactView(Context context,Player p, AttributeSet attrs) {
 		super(context, attrs);
-		this.player=p;
+		setPlayer(p);
 	}
 
 	public ContactView(Context context,Player p) {
 		super(context);
-		this.player=p;
+		setPlayer(p);
 	}
-	
+	*/
 
 	public ContactView(Context context, AttributeSet attrs, int defStyle) {
-		this(context,getMockPlayer(),attrs,defStyle);
+		super(context, attrs,defStyle);
 	}
 	
 	public ContactView(Context context, AttributeSet attrs) {
-		this(context,getMockPlayer(),attrs);
+		super(context, attrs);
 	}
 	
 	public ContactView(Context context) {
-		this(context,getMockPlayer());
+		super(context);
 	}
 	
-
+/*
 	private static Player getMockPlayer() {
 		Player mockPlayer = new Player();
 		mockPlayer.setName("nom");
 		return mockPlayer;
 	}
-
+*/
 
 
 	@Override
@@ -62,6 +62,7 @@ public class ContactView extends RelativeLayout   {
 	}
 
 	public void setPlayer(Player player) {	
+		//if(player==null)return;
 		this.player=player;
 		update();
 		

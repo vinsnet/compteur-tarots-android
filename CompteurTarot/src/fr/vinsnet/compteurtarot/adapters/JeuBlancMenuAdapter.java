@@ -9,7 +9,7 @@ import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import fr.vinsnet.compteurtarot.activities.fillroundstrategy.FillRoundStrategy;
+import fr.vinsnet.compteurtarot.activities.strategies.fillround.FillRoundStrategy;
 import fr.vinsnet.compteurtarot.model.Bonus;
 import fr.vinsnet.compteurtarot.model.JeuBlancAtout;
 import fr.vinsnet.compteurtarot.model.JeuBlancTete;

@@ -21,7 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import fr.vinsnet.compteurtarot.R;
 import fr.vinsnet.compteurtarot.Utils;
-import fr.vinsnet.compteurtarot.activities.fillroundstrategy.FillRoundStrategy;
+import fr.vinsnet.compteurtarot.activities.strategies.fillround.FillRoundStrategy;
 import fr.vinsnet.compteurtarot.adapters.AddButtonMenuAdapter;
 import fr.vinsnet.compteurtarot.adapters.AddButtonMenuItem;
 import fr.vinsnet.compteurtarot.adapters.BiddingSpinnerAdapter;

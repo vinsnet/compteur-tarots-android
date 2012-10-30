@@ -10,7 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import fr.vinsnet.compteurtarot.Utils;
-import fr.vinsnet.compteurtarot.activities.fillroundstrategy.FillRoundStrategy;
+import fr.vinsnet.compteurtarot.activities.strategies.fillround.FillRoundStrategy;
 import fr.vinsnet.compteurtarot.adapters.MenuItem;
 import fr.vinsnet.compteurtarot.model.PetitAuBout;
 import fr.vinsnet.compteurtarot.model.Player;

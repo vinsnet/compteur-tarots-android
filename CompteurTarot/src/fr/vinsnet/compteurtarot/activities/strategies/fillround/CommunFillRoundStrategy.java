@@ -1,8 +1,8 @@
-package fr.vinsnet.compteurtarot.activities.fillroundstrategy;
+package fr.vinsnet.compteurtarot.activities.strategies.fillround;
 
 import java.util.List;
 
-import fr.vinsnet.compteurtarot.activities.resultstrategy.ResultStrategy;
+import fr.vinsnet.compteurtarot.activities.strategies.calcutateresult.ResultStrategy;
 import fr.vinsnet.compteurtarot.model.Bid;
 import fr.vinsnet.compteurtarot.model.Bonus;
 import fr.vinsnet.compteurtarot.model.Game;

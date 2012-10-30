@@ -133,9 +133,14 @@ public class Round implements ObjectWithId {
 	/**
 	 * ask to all FuturPlayers to be loaded
 	 */
-	public void loadPlayers() {
-		List<Player> players = new ArrayList<Player>(getDefenders()) ;
-		players.addAll(getTakers());
+	public void loadPlayers(List<Player> players) {
+		
+		List<Player> roundPlayers = new ArrayList<Player>(this.getTakers());
+		roundPlayers.addAll(this.getDefenders());
+		
+		for(Player p :roundPlayers){
+			p.loadWithPlayers(players);
+		}
 		
 		for( Poignee p : getPoignees()){
 			p.getPlayer().loadWithPlayers(players);
