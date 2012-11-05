@@ -7,10 +7,11 @@ import java.util.List;
 
 import fr.vinsnet.compteurtarot.Utils;
 import fr.vinsnet.compteurtarot.activities.strategies.calcutateresult.ResultStrategy;
+import fr.vinsnet.utils.ObjectWithId;
 
 import android.util.Log;
 
-public class Game {
+public class Game  implements ObjectWithId{
 
 	private long id;
 

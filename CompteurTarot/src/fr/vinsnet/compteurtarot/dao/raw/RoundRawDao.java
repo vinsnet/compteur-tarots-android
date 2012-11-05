@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import fr.vinsnet.compteurtarot.dao.RoundDao;
+import fr.vinsnet.compteurtarot.model.Game;
 import fr.vinsnet.compteurtarot.model.Round;
 import fr.vinsnet.utils.ObjectWithId;
 
@@ -45,10 +46,10 @@ public class RoundRawDao extends BaseRawDao implements RoundDao {
 
 
 	@Override
-	protected void create(ObjectWithId o, SQLiteDatabase db) {
+	protected boolean create(ObjectWithId o, SQLiteDatabase db) {
 		// TODO Auto-generated method stub
 		Log.v(TAG,"mergeOrCreate");
-		save((Round)o,db);
+		return save((Round)o,db)>0;
 		
 	}
 	
@@ -68,6 +69,15 @@ public class RoundRawDao extends BaseRawDao implements RoundDao {
 		//TODO
 		ContentValues c = new ContentValues();
 		return c;
+	}
+
+
+
+
+	public void loadRoundForGame(Game game, SQLiteDatabase db) {
+		// TODO Auto-generated method stub
+		Log.v(TAG,"loadRoundForGame");
+		
 	}
 
 }

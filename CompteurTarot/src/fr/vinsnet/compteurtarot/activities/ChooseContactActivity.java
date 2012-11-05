@@ -82,7 +82,7 @@ public class ChooseContactActivity extends Activity {
 	
 	
 	public void startGame(View view) {
-		Utils.getGameDao(this).save(currentGame);
+		Utils.getGameDao(this).updateOrCreate(currentGame);
 		Utils.displayGame(this, currentGame);
 	}
 	

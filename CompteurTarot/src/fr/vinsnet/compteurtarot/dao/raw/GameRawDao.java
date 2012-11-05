@@ -91,40 +91,7 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 
 	}
 
-	public boolean save(Game g) {
 
-		SQLiteDatabase db = null;
-		boolean insertFailed = false;
-		try {
-			db = this.getWritableDatabase();
-			db.beginTransaction();
-
-			insertFailed |= !saveOrUpdateBaseGame(g, db);
-			cleanPlayerGameJoin(g, db);
-			for (Player p : g.getPlayers()) {
-				playerDao.ensureOrCreate(p, db);
-				insertFailed |= !definePlayerGameLink(g, p, db);
-			}
-
-			for(Round r : g.getRounds()){
-				roundDao.ensureOrCreate(r, db);
-				insertFailed |= !defineRoundGameLink(g, r, db);
-		
-			}
-			
-			if (!insertFailed) {
-				db.setTransactionSuccessful();
-			} else {
-				Log.w(TAG,"transaction failed");
-			}
-			db.endTransaction();
-		} catch (Throwable e) {
-			Log.w(TAG, e.getMessage());
-		}
-		db.close();
-
-		return !insertFailed;
-	}
 
 	private ContentValues getGamePlayerJoinValues(Game g, Player p) {
 		ContentValues c = new ContentValues();
@@ -198,6 +165,17 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 		if (id == 0) {
 			return null;
 		}
+		game = loadGameInfos(game,id,db);
+		//TODO faire des test pour verifier que game n'est pas remis a null
+		loadGamePlayers(game,db);
+		loadGameRounds(game,db);
+		return game;
+	}
+	
+	
+
+	private Game loadGameInfos(Game game,long id, SQLiteDatabase db) {
+		Log.v(TAG,"loadGameInfos");
 		Cursor cursor = null;
 		try {
 			cursor=db.query(TABLE_NAME, new String[] { KEY_ID, KEY_STARTTIME }, KEY_ID
@@ -214,14 +192,19 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 			game.setStartTime(cursor.getLong(1));
 		} catch (Throwable e) {
 			Log.w(TAG, e.getMessage());
-			return game;
+			return null;
 		} finally{
 			if (cursor != null) {
 				cursor.close();
 			}
 		}
+		return game;
+	}
+
+	private void loadGamePlayers(Game game, SQLiteDatabase db) {
 		Cursor playerIds = null;
 		try {
+			Log.v(TAG, "loadGamePlayers");
 			playerIds = db.query(true, JOIN_PLAYER_TABLE_NAME,
 					new String[] { KEY_ID_PLAYER }, KEY_ID_GAME + "=?",
 					new String[] { "" + game.getId() }, null, null, null, null);
@@ -239,8 +222,14 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 				playerIds.close();
 			}
 		}
-		return game;
+		
 	}
+
+	protected void loadGameRounds(Game game, SQLiteDatabase db) {
+		roundDao.loadRoundForGame(game,db);
+	}
+
+
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
@@ -274,10 +263,45 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 	}
 
 	@Override
-	protected void create(ObjectWithId o, SQLiteDatabase db) {
-		// TODO Auto-generated method stub
-		Log.v(TAG,"mergeOrCreate");
+	protected boolean create(ObjectWithId o, SQLiteDatabase db) {
+		Log.v(TAG,"Create");
+		Game g = (Game)o;
+		boolean insertFailed = false;
+		try {
+			db = this.getWritableDatabase();
+			db.beginTransaction();
+
+			insertFailed |= !saveOrUpdateBaseGame(g, db);
+			cleanPlayerGameJoin(g, db);
+			for (Player p : g.getPlayers()) {
+				playerDao.updateOrCreate(p, db);
+				insertFailed |= !definePlayerGameLink(g, p, db);
+			}
+
+			for(Round r : g.getRounds()){
+				roundDao.updateOrCreate(r, db);
+				insertFailed |= !defineRoundGameLink(g, r, db);
+		
+			}
+			
+			if (!insertFailed) {
+				db.setTransactionSuccessful();
+			} else {
+				Log.w(TAG,"transaction failed");
+			}
+			db.endTransaction();
+		} catch (Throwable e) {
+			Log.w(TAG, e.getMessage());
+		}
+
+		return !insertFailed;
 		
 	}
+
+	public boolean updateOrCreate(Game g) {
+		Log.v(TAG,"updateOrCreate");
+		return super.updateOrCreate(g);
+	}
+
 
 }

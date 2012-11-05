@@ -1,11 +1,10 @@
 package fr.vinsnet.compteurtarot.dao.raw;
 
-import fr.vinsnet.compteurtarot.model.Player;
-import fr.vinsnet.utils.ObjectWithId;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import fr.vinsnet.utils.ObjectWithId;
 
 public abstract class BaseRawDao extends SQLiteOpenHelper{
 
@@ -17,17 +16,35 @@ public abstract class BaseRawDao extends SQLiteOpenHelper{
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-	public void ensureOrCreate(ObjectWithId o, SQLiteDatabase db) {
+	public boolean updateOrCreate(ObjectWithId o, SQLiteDatabase db) {
 		Log.v(TAG, "ensureOrCreate");
 		if (o.getId() == 0) {
-			create(o, db);
+			return create(o, db);
 		} else {
 			// TODO Ensure if exist ?
 		}
+		return false;
+	}
+	
+	public boolean updateOrCreate(ObjectWithId o) {
+		SQLiteDatabase db =null;
+		boolean succes = false;
+		try{
+		db= this.getWritableDatabase();
+		db.beginTransaction();
 
+
+		succes =  updateOrCreate(o,db);
+		db.endTransaction();
+		}catch(Throwable e){
+			Log.w(TAG, e.getMessage());
+		}
+		db.close();
+
+		return succes;
 	}
 	
 	
-	protected abstract void create(ObjectWithId o,SQLiteDatabase db);
+	protected abstract boolean create(ObjectWithId o,SQLiteDatabase db);
 	
 }

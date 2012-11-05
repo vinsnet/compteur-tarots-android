@@ -47,13 +47,13 @@ public class PlayerRawDao extends BaseRawDao implements PlayerDao {
 
 
 
-	private void mergeOnContactIdOrCreate(Player p, SQLiteDatabase db) {
+	private boolean mergeOnContactIdOrCreate(Player p, SQLiteDatabase db) {
 		long id = findPlayerIdByContactId(p, db);
 		if (id > 0) {
 
 			p.setId(id);
 		}
-		save(p, db);
+		return save(p, db)>0;
 
 	}
 
@@ -127,10 +127,10 @@ public class PlayerRawDao extends BaseRawDao implements PlayerDao {
 	}
 
 	@Override
-	protected void create(ObjectWithId o, SQLiteDatabase db) {
+	protected boolean create(ObjectWithId o, SQLiteDatabase db) {
 		Log.v(TAG,"merge");
 
-		mergeOnContactIdOrCreate((Player) o, db);
+		return mergeOnContactIdOrCreate((Player) o, db);
 		
 	}
 }
