@@ -14,11 +14,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import fr.vinsnet.compteurtarot.R;
 import fr.vinsnet.compteurtarot.Utils;
-import fr.vinsnet.compteurtarot.activities.strategies.calcutateresult.ResultStrategy;
 import fr.vinsnet.compteurtarot.model.Game;
 import fr.vinsnet.compteurtarot.model.Player;
 import fr.vinsnet.compteurtarot.model.Round;
-import fr.vinsnet.compteurtarot.model.strategies.RoundResult;
 import fr.vinsnet.compteurtarot.model.strategies.RoundScore;
 import fr.vinsnet.compteurtarot.views.PlayerScoreView;
 

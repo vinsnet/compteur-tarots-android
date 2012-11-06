@@ -20,6 +20,7 @@ public class Round implements ObjectWithId {
 	private List<Poignee> poignees;
 	private List<Bonus> bonus;
 	private Bid bidding;
+	private Game game;
 	
 	public Round() {
 		takers = new ArrayList<Player>();
@@ -30,6 +31,7 @@ public class Round implements ObjectWithId {
 		bidding=null;
 		nbBoutsTakers=-1;
 		scoreTakers=-1;
+		game=null;
 	}
 
 	public long getId() {
@@ -149,6 +151,14 @@ public class Round implements ObjectWithId {
 			b.getPlayer().loadWithPlayers(players);
 		}
 		
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
 	}
 
 

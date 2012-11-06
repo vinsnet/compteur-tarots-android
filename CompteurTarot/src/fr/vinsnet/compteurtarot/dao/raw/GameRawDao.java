@@ -31,12 +31,12 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 	private static final String JOIN_PLAYER_TABLE_NAME = "games_players";
 
 
-	private static final String JOIN_ROUND_TABLE_NAME = "games_rounds";;
+	//private static final String JOIN_ROUND_TABLE_NAME = "games_rounds";;
 
 	private static final String KEY_ID_GAME = "id_game";
 
 	private static final String KEY_ID_PLAYER = "id_player";
-	private static final String KEY_ID_ROUND = "id_round";
+//	private static final String KEY_ID_ROUND = "id_round";
 
 	private static final String GAME_PLAYER_TABLE_CREATE = "CREATE TABLE "
 			+ JOIN_PLAYER_TABLE_NAME + " (" + KEY_ID
@@ -47,7 +47,7 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 			+ PlayerRawDao.TABLE_NAME + " on delete restrict" +
 
 			");";
-	private static final String GAME_ROUND_TABLE_CREATE = "CREATE TABLE "
+/*	private static final String GAME_ROUND_TABLE_CREATE = "CREATE TABLE "
 			+ JOIN_ROUND_TABLE_NAME + " (" + KEY_ID
 			+ " integer primary key autoincrement, " + KEY_ID_GAME
 			+ " integer constraint fk_game references " + TABLE_NAME
@@ -56,7 +56,7 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 			+ RoundRawDao.TABLE_NAME + " " +
 
 			");";
-
+*/
 	private PlayerRawDao playerDao;
 
 	private RoundRawDao roundDao;
@@ -72,11 +72,11 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 				getGamePlayerJoinValues(g, p));
 		return k > 0;
 	}
-	protected boolean defineRoundGameLink(Game g, Round r, SQLiteDatabase db) {
+	/*protected boolean defineRoundGameLink(Game g, Round r, SQLiteDatabase db) {
 		long k = db.insertOrThrow(JOIN_ROUND_TABLE_NAME, KEY_ID,
 				getGameRoundJoinValues(g, r));
 		return k > 0;
-	}
+	}*/
 
 	protected boolean saveOrUpdateBaseGame(Game g, SQLiteDatabase db) {
 		long k;
@@ -236,7 +236,7 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 		this.playerDao.onCreate(db);
 		db.execSQL(GAME_TABLE_CREATE);
 		db.execSQL(GAME_PLAYER_TABLE_CREATE);
-		db.execSQL(GAME_ROUND_TABLE_CREATE);
+		//db.execSQL(GAME_ROUND_TABLE_CREATE);
 
 		Log.v(TAG, "creation de la table game");
 	}
@@ -268,7 +268,6 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 		Game g = (Game)o;
 		boolean insertFailed = false;
 		try {
-			db = this.getWritableDatabase();
 			db.beginTransaction();
 
 			insertFailed |= !saveOrUpdateBaseGame(g, db);
@@ -280,7 +279,7 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 
 			for(Round r : g.getRounds()){
 				roundDao.updateOrCreate(r, db);
-				insertFailed |= !defineRoundGameLink(g, r, db);
+				insertFailed |= !roundDao.updateOrCreate(r, db);
 		
 			}
 			
