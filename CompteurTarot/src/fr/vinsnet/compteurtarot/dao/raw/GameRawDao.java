@@ -263,7 +263,7 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 	}
 
 	@Override
-	protected boolean create(ObjectWithId o, SQLiteDatabase db) {
+	public boolean updateOrCreate(ObjectWithId o, SQLiteDatabase db) {
 		Log.v(TAG,"Create");
 		Game g = (Game)o;
 		boolean insertFailed = false;

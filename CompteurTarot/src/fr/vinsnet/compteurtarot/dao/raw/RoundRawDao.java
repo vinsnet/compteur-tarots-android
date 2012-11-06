@@ -46,7 +46,7 @@ public class RoundRawDao extends BaseRawDao implements RoundDao {
 
 
 	@Override
-	protected boolean create(ObjectWithId o, SQLiteDatabase db) {
+	public boolean updateOrCreate(ObjectWithId o, SQLiteDatabase db) {
 		// TODO Auto-generated method stub
 		Log.v(TAG,"mergeOrCreate");
 		return save((Round)o,db)>0;

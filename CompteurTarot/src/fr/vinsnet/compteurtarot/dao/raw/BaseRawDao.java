@@ -16,15 +16,8 @@ public abstract class BaseRawDao extends SQLiteOpenHelper {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
-	public boolean updateOrCreate(ObjectWithId o, SQLiteDatabase db) {
-		Log.v(TAG, "ensureOrCreate");
-		if (o.getId() == 0) {
-			return create(o, db);
-		} else {
-			// TODO Ensure if exist ?
-		}
-		return false;
-	}
+	public abstract  boolean updateOrCreate(ObjectWithId o, SQLiteDatabase db) ;
+
 
 	public boolean updateOrCreate(ObjectWithId o) {
 		SQLiteDatabase db = null;
@@ -41,6 +34,5 @@ public abstract class BaseRawDao extends SQLiteOpenHelper {
 		return succes;
 	}
 
-	protected abstract boolean create(ObjectWithId o, SQLiteDatabase db);
 
 }
