@@ -6,6 +6,6 @@ import fr.vinsnet.compteurtarot.model.Game;
 public interface RoundDao {
 
 
-	void loadRoundForGame(Game game, SQLiteDatabase db);
+	void loadRoundsForGame(Game game, SQLiteDatabase db);
 	
 }

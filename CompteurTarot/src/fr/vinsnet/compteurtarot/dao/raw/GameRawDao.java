@@ -20,9 +20,9 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 	private static final String KEY_STARTTIME = "startTime";
 
 	private static final String GAME_TABLE_CREATE = "CREATE TABLE "
-			+ TABLE_NAME + " (" + KEY_ID
-			+ " integer primary key autoincrement, " + KEY_STARTTIME
-			+ " integer" +
+			+ TABLE_NAME + " (" +
+			KEY_ID	+ " integer primary key autoincrement, " +
+			KEY_STARTTIME+ " integer" +
 
 			");";
 
@@ -226,7 +226,7 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 	}
 
 	protected void loadGameRounds(Game game, SQLiteDatabase db) {
-		roundDao.loadRoundForGame(game,db);
+		roundDao.loadRoundsForGame(game,db);
 	}
 
 

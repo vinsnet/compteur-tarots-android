@@ -12,15 +12,18 @@ public class Round implements ObjectWithId {
 	public static final int MAX_SCORE= 91;
 	
 	private long id;
+	private long creationTimestamp;
+	private long updateTimestamp;
 	private List<Player> takers;
 	private List<Player> defenders;
-	private int nbBoutsTakers=-1;
-	private float scoreTakers=-1;
+	private int nbBoutsTakers;
+	private float scoreTakers;
 	private PetitAuBout petitAuBout;
 	private List<Poignee> poignees;
 	private List<Bonus> bonus;
 	private Bid bidding;
 	private Game game;
+	
 	
 	public Round() {
 		takers = new ArrayList<Player>();
@@ -31,6 +34,8 @@ public class Round implements ObjectWithId {
 		bidding=null;
 		nbBoutsTakers=-1;
 		scoreTakers=-1;
+		updateTimestamp=-1;
+		creationTimestamp=-1;
 		game=null;
 	}
 
@@ -159,6 +164,22 @@ public class Round implements ObjectWithId {
 
 	public void setGame(Game game) {
 		this.game = game;
+	}
+
+	public long getCreationTimestamp() {
+		return creationTimestamp;
+	}
+
+	public void setCreationTimestamp(long creationTimestamp) {
+		this.creationTimestamp = creationTimestamp;
+	}
+
+	public long getUpdateTimestamp() {
+		return updateTimestamp;
+	}
+
+	public void setUpdateTimestamp(long updateTimestamp) {
+		this.updateTimestamp = updateTimestamp;
 	}
 
 
