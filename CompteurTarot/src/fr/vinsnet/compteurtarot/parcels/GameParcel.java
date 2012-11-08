@@ -21,6 +21,7 @@ public int describeContents() {
 }
 
 public void writeToParcel(Parcel dest, int flags) {
+	writeId(dest);
 	writeStartTime(dest);
 	writePlayerList(dest);
 	writeRoundList(dest);
@@ -45,12 +46,15 @@ private void writePlayerList(Parcel dest) {
 
 private void writeStartTime(Parcel dest) {
 	dest.writeLong(game.getStartTime().getTime());
-	
+}
+private void writeId(Parcel dest) {
+	dest.writeLong(game.getId());
 }
 
 protected static GameParcel gameFromParcel(Parcel in){
 		Game game = new Game();
 		GameParcel parcel = new GameParcel(game);
+		parcel.readId(in);
 		parcel.readStartTime(in);
 		parcel.readPlayerList(in);
 		parcel.readRoundList(in);
@@ -58,6 +62,11 @@ protected static GameParcel gameFromParcel(Parcel in){
 	}
 
 
+
+private void readId(Parcel in) {
+	game.setId(in.readLong());
+	
+}
 
 private  void readRoundList( Parcel in) {
 	int size = in.readInt();
