@@ -19,15 +19,15 @@ public class RoundRawDao extends BaseRawDao implements RoundDao {
 
 	private static final String KEY_ID = "id";
 	private static final String KEY_GAME_ID = "game_id";
-	private static final String KEY_CREATION_TIME = "CREATION_TIME";
-	private static final String KEY_UPDATE_TIME = "UPDATE_TIME";
+	private static final String KEY_CREATION_TIME = "creation_time";
+	private static final String KEY_UPDATE_TIME = "update_time";
 
 	private static final String ROUND_TABLE_CREATE = "CREATE TABLE "
 			+ TABLE_NAME + " (" + 
-			KEY_ID	+ " integer primary key autoincrement" +
-			KEY_GAME_ID + "integer constraint fk_game references" + GameRawDao.TABLE_NAME +
-			KEY_CREATION_TIME + "integer" +
-			KEY_UPDATE_TIME + "integer" +
+			KEY_ID	+ " integer primary key autoincrement, " +
+			KEY_GAME_ID + " integer constraint fk_game references " + GameRawDao.TABLE_NAME +","+
+			KEY_CREATION_TIME + " integer, " +
+			KEY_UPDATE_TIME + " integer " +
 			" );";
 
 
@@ -120,6 +120,7 @@ public class RoundRawDao extends BaseRawDao implements RoundDao {
 				Round r = new Round();
 				loadRoundInfos(r, cursor, db);
 				game.addRound(r);
+				cursor.moveToNext();
 			}
 			
 		} catch (Throwable e) {

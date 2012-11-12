@@ -234,6 +234,7 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		this.playerDao.onCreate(db);
+		this.roundDao.onCreate(db);
 		db.execSQL(GAME_TABLE_CREATE);
 		db.execSQL(GAME_PLAYER_TABLE_CREATE);
 		//db.execSQL(GAME_ROUND_TABLE_CREATE);
@@ -300,6 +301,19 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 	public boolean updateOrCreate(Game g) {
 		Log.v(TAG,"updateOrCreate");
 		return super.updateOrCreate(g);
+	}
+
+	public Game loadGame(long id) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Game g = null;
+		try {
+			g = loadGame(id, db);
+		} catch (Exception e) {
+			Log.e(TAG, "erreur au chargement");
+			g = new Game();
+		}
+		db.close();
+		return g;
 	}
 
 

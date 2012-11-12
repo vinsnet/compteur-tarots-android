@@ -25,7 +25,6 @@ public abstract class BaseRawDao extends SQLiteOpenHelper {
 		try {
 			db = this.getWritableDatabase();
 			succes = updateOrCreate(o, db);
-			db.endTransaction();
 		} catch (Throwable e) {
 			Log.w(TAG, e.getMessage());
 		}

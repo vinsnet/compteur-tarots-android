@@ -794,4 +794,15 @@ public class PlayerJeuBlancChosenCallback implements OnPlayerChosenListener{
 		return askPoigneePlayerAlertDialog;
 	}
 	
+	public void saveRound(View view){
+		dismissAlertDialog();
+		
+		Game g = getGame();
+		g.addRound(getCurrentRound());
+		Utils.updateRoundInIntent(this,null);
+		Utils.getGameDao(this).updateOrCreate(g);
+		setResult(RESULT_OK, getIntent());
+		this.finish();
+	}
+	
 }

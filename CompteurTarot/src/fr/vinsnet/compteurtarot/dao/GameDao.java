@@ -10,6 +10,8 @@ public interface GameDao {
 
 	public Game loadLastGame();
 
+	public Game loadGame(long id);
+
 
 	
 }

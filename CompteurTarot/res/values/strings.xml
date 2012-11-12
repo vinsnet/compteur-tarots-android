@@ -19,5 +19,6 @@
     <string name="ara_add">Ajouter …</string>
     <string name="ara_round_result_win">Gagnée</string>
     <string name="ara_round_result_loose">Perdue</string>
+    <string name="ara_save_round">Sauvegarder</string>
 
 </resources>

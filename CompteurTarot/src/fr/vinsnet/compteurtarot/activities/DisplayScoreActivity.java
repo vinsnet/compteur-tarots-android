@@ -151,10 +151,21 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	
 	if(requestCode==Utils.NEW_ROUND_REQUEST_CODE){
 		Log.v(TAG,"onActivityResult NEW_ROUND_REQUEST_CODE");
-		if (resultCode == AddRoundActivity.RESULT_NOT_FINISHED){
+		switch(resultCode){
+		case AddRoundActivity.RESULT_NOT_FINISHED:
 			currentRound = Utils.getCurrentRound(data,this.currentGame.getPlayers());
-			onContentChanged();
+			break;
+		case AddRoundActivity.RESULT_OK : 
+			currentRound = null;
+			reloadCurrentGame();
 		}
+		onContentChanged();
 	}
+}
+
+protected void reloadCurrentGame() {
+	Log.v(TAG,"reloadCurrentGame");
+	currentGame = Utils.getGameDao(this).loadGame(currentGame.getId());
+	
 }
 }
