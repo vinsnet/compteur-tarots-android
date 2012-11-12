@@ -95,14 +95,11 @@ public class AddRoundActivity extends Activity implements FillRoundStrategy.Acti
 					}
 					
 					public void onStartTrackingTouch(SeekBar seekBar) {
-						// TODO Auto-generated method stub
-						Log.v(TAG, "onStartTrackingTouch");
-						
+						//TODO ?
 					}
 					
 					public void onProgressChanged(SeekBar seekBar, int progress,
 							boolean fromUser) {
-						// TODO Auto-generated method stub
 						Log.v(TAG, "onProgressChanged "+progress + " " +fromUser);
 						if(fromUser){
 							scoreStrategy.setNbBoutsTakers(progress);
@@ -117,12 +114,10 @@ public class AddRoundActivity extends Activity implements FillRoundStrategy.Acti
 					
 					public void onStopTrackingTouch(SeekBar seekBar) {
 						onContentChanged();
-						
 					}
 					
 					public void onStartTrackingTouch(SeekBar seekBar) {
-						// TODO Auto-generated method stub
-						Log.v(TAG, "onStartTrackingTouch");
+						// TODO ?
 						
 					}
 					
@@ -393,7 +388,6 @@ public class AddRoundActivity extends Activity implements FillRoundStrategy.Acti
 	}
 	
     private Button getbiddingOkButton() {
-		// TODO Auto-generated method stub
 	return (Button) findViewById(R.id.ara_validate_bidding_button);
 	}
 
@@ -754,7 +748,7 @@ public class PlayerJeuBlancChosenCallback implements OnPlayerChosenListener{
 	}
 
 	public void onAskChelem() {
-		// TODO Auto-generated method stub
+		// TODO 
 		Log.v(TAG,"onAskChelem");
 		
 	}
@@ -774,7 +768,6 @@ public class PlayerJeuBlancChosenCallback implements OnPlayerChosenListener{
 		dismissAlertDialog();
 		
 		Utils.updateRoundInIntent(this,getCurrentRound());
-		//getIntent().s
 		setResult(RESULT_NOT_FINISHED, getIntent());
 		this.finish();
 	}

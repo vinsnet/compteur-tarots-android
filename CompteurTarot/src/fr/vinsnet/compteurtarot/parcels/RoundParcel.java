@@ -53,9 +53,7 @@ public class RoundParcel extends WithFuturPlayer implements Parcelable {
 			parcel.writeInt(0);
 		} else {
 			Bid b = round.getBidding();
-			parcel.writeInt(b.getMultiply());
-			parcel.writeInt(b.getValue());
-			parcel.writeString(b.getName());
+			parcel.writeInt(b.getType());
 		}
 
 	}
@@ -197,20 +195,17 @@ public class RoundParcel extends WithFuturPlayer implements Parcelable {
 	}
 
 	private void readBiddind(Parcel source) {
-		int bidMultiply = source.readInt();
-		if (bidMultiply == 0) {
+		int bidType = source.readInt();
+		if (bidType == 0) {
 			round.setbidding(null);
 		} else {
-			int value = source.readInt();
-			String label = source.readString();
-			round.setbidding(new Bid(label, value, bidMultiply));
+			round.setbidding(Bid.instanciateFromBidType(bidType));
 		}
 	}
 
 	private void readId(Parcel source) {
 		round.setId(source.readLong());
-
-	}
+	} 
 
 	public static final Parcelable.Creator<RoundParcel> CREATOR = new Parcelable.Creator<RoundParcel>() {
 		// @Override

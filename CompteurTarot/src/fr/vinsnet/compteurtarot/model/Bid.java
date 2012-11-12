@@ -1,17 +1,17 @@
 package fr.vinsnet.compteurtarot.model;
 
-public class Bid {
+import android.util.Log;
 
+public abstract class Bid {
+
+	private static final String TAG = "Bid";
 	private String name;
 	private int value;
 	private int multiply;
 	
-	public Bid(String name, int value, int multiply) {
-		super();
-		this.name = name;
-		this.value = value;
-		this.multiply=multiply;
+	protected Bid() {
 	}
+	
 	public int getMultiply() {
 		return multiply;
 	}
@@ -29,6 +29,23 @@ public class Bid {
 	}
 	public void setValue(int value) {
 		this.value = value;
+	}
+	
+	public abstract int getType();
+	
+	public static Bid instanciateFromBidType(int bidType) {
+		Log.v(TAG,"instanciateFromBidType");
+		
+		switch(bidType){
+		case BidPetite.TYPE : return new BidPetite();
+		case BidPouce.TYPE : return new BidPouce();
+		case BidGarde.TYPE : return new BidGarde();
+		case BidGardeSans.TYPE : return new BidGardeSans();
+		case BidGardeContre.TYPE : return new BidGardeContre();
+		default :
+			return null;
+		}
+		
 	}
 	
 }

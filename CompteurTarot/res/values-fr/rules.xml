@@ -2,6 +2,7 @@
 <resources>
     <string-array name="bidName">
         <item >Petite</item>
+        <item >Pouce</item>
         <item >Garde</item>
         <item >Garde Sans</item>
         <item >Garde Contre</item>

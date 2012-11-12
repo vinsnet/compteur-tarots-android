@@ -147,7 +147,7 @@ public class Utils {
 
 	public static void updateRoundInIntent(Activity context,Round round) {
 		Intent intent = context.getIntent();
-		if(round==null){
+		if(round!=null){
 			intent.putExtra(CURRENT_ROUND_PARCEL_NAME, new RoundParcel(round));
 		}else{
 			intent.removeExtra(CURRENT_GAME_PARCEL_NAME);

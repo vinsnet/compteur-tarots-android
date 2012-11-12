@@ -186,6 +186,8 @@ public abstract class CommunResultStrategy implements ResultStrategy {
 
 	
 	public List<Bid> getBidList(Context context) {
+		//TODO read Bids config From DB
+		//TODO only the name in configuration files
 		Resources res = context.getResources();
 		String[] bidNames = res.getStringArray(R.array.bidName);
 		int[] bidValues = res.getIntArray(R.array.bidValue);
@@ -193,7 +195,11 @@ public abstract class CommunResultStrategy implements ResultStrategy {
 		
 		List<Bid> bids = new ArrayList<Bid>(bidNames.length);
 		for(int i=0;i<bidNames.length;i++){
-			bids.add(new Bid(bidNames[i], bidValues[i], bidMultiply[i]));
+			Bid b = Bid.instanciateFromBidType(i+1);
+			b.setName(bidNames[i]);
+			b.setValue(bidValues[i]);
+			b.setMultiply(bidMultiply[i]);
+			bids.add(b);
 		}
 		return bids;
 	}
