@@ -142,6 +142,31 @@ public class Round implements ObjectWithId {
 	 */
 	public void loadPlayers(List<Player> players) {
 		
+		loadTakerAndDefenders(players);
+		
+		loadPoigneesPlayer(players);
+		loadBonusPlayer(players);
+	}
+
+	protected void loadPoigneesPlayer(List<Player> players) {
+		for( Poignee p : getPoignees()){
+			p.getPlayer().loadWithPlayers(players);
+		}
+	}
+	protected void loadBonusPlayer(List<Player> players) {
+		for( Bonus b : getBonus()){
+			b.getPlayer().loadWithPlayers(players);
+		}
+	}
+	
+	
+	
+	protected void loadTakerAndDefenders(List<Player> players) {
+		if(this.takers.isEmpty())return;
+
+
+		updateDefenderList(players);
+		
 		List<Player> roundPlayers = new ArrayList<Player>(this.getTakers());
 		roundPlayers.addAll(this.getDefenders());
 		
@@ -149,12 +174,25 @@ public class Round implements ObjectWithId {
 			p.loadWithPlayers(players);
 		}
 		
-		for( Poignee p : getPoignees()){
-			p.getPlayer().loadWithPlayers(players);
+	}
+
+	private List<Player> updateDefenderList(List<Player> players) {
+		
+		defenders.clear();
+		
+		for(Player p : players){
+			boolean isCurrentPlayerIsTaker = false;
+			for(Player t : takers){
+				if(t.getId()==p.getId()){
+					isCurrentPlayerIsTaker = true;
+				}
+			}
+			if(!isCurrentPlayerIsTaker){
+				defenders.add(p);
+			}
 		}
-		for( Bonus b : getBonus()){
-			b.getPlayer().loadWithPlayers(players);
-		}
+		
+		return defenders;
 		
 	}
 

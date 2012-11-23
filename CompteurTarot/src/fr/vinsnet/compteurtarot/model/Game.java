@@ -64,7 +64,7 @@ public class Game  implements ObjectWithId{
 	}
 
 	public void addPlayer(Player player) {
-		//TODO verifié appartenance
+		//TODO verifier appartenance
 		players.add(player);
 		Log.d("LIST ADAPTER-addPlayer",""+this.players.hashCode());
 		
@@ -79,6 +79,13 @@ public class Game  implements ObjectWithId{
 	public void addRound(Round round) {
 		rounds.add(round);
 		round.setGame(this);
+	}
+
+	public void loadFuturePlayerInAllRounds(List<Player> players) {
+		for(Round r : getRounds()){
+			r.loadPlayers(players);
+		}
+		
 	}
 
 }

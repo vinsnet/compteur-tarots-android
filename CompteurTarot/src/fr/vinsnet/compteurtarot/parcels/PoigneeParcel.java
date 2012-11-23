@@ -7,7 +7,6 @@ import fr.vinsnet.compteurtarot.model.DoublePoignee;
 import fr.vinsnet.compteurtarot.model.Poignee;
 import fr.vinsnet.compteurtarot.model.SimplePoignee;
 import fr.vinsnet.compteurtarot.model.TriplePoignee;
-import fr.vinsnet.compteurtarot.model.futur.FuturPlayer;
 
 public class PoigneeParcel extends WithFuturPlayer implements Parcelable{
 

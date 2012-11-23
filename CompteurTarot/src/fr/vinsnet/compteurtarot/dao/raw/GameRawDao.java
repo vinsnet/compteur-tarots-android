@@ -166,13 +166,16 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 			return null;
 		}
 		game = loadGameInfos(game,id,db);
-		//TODO faire des test pour verifier que game n'est pas remis a null
+		//TODO faire des tests pour verifier que game n'est pas remis a null
 		loadGamePlayers(game,db);
 		loadGameRounds(game,db);
+		game.loadFuturePlayerInAllRounds(game.getPlayers());
 		return game;
 	}
 	
 	
+
+
 
 	private Game loadGameInfos(Game game,long id, SQLiteDatabase db) {
 		Log.v(TAG,"loadGameInfos");
@@ -234,9 +237,9 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		this.playerDao.onCreate(db);
-		this.roundDao.onCreate(db);
 		db.execSQL(GAME_TABLE_CREATE);
 		db.execSQL(GAME_PLAYER_TABLE_CREATE);
+		this.roundDao.onCreate(db);
 		//db.execSQL(GAME_ROUND_TABLE_CREATE);
 
 		Log.v(TAG, "creation de la table game");

@@ -87,10 +87,10 @@ public class PlayerRawDao extends BaseRawDao implements PlayerDao {
 		long key ;
 		if(p.getId()==0){
 			key= db.insertOrThrow(TABLE_NAME, KEY_ID, getContentValues(p));
+			p.setId(key);
 		}else{
 			key= db.update(TABLE_NAME, getContentValues(p),KEY_ID+"=?",new String[]{""+p.getId()});
 		}
-		p.setId(key);
 		return key;
 	}
 
