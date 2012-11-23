@@ -130,12 +130,21 @@ public class RoundRawDao extends BaseRawDao implements RoundDao {
 		round.setId(cursor.getLong(cursor.getColumnIndex(KEY_ID)));
 		round.setCreationTimestamp(cursor.getLong(cursor.getColumnIndex(KEY_CREATION_TIME)));
 		round.setUpdateTimestamp(cursor.getLong(cursor.getColumnIndex(KEY_UPDATE_TIME)));
-		round.setbidding(new FutureBid(cursor.getColumnIndex(KEY_BIDDING_TYPE)));
+		
+		int bidId = cursor.getInt(cursor.getColumnIndex(KEY_BIDDING_TYPE));
+		if(bidId>0){
+			round.setbidding(new FutureBid(bidId));	
+		}
 		round.setNbBoutsTakers(cursor.getInt(cursor.getColumnIndex(KEY_NB_BOUTS_TAKERS)));
 		round.setScoreTakers(cursor.getFloat(cursor.getColumnIndex(KEY_SCORE_TAKERS)));
-		round.getTakers().add(new FuturePlayer(cursor.getLong(cursor.getColumnIndex(KEY_TAKER_ID))));
-		round.getTakers().add(new FuturePlayer(cursor.getLong(cursor.getColumnIndex(KEY_TAKER_CALLED_ID))));
-		//game is set when added to game;
+		long firstTakerId = cursor.getLong(cursor.getColumnIndex(KEY_TAKER_ID));
+		long secondTakerId = cursor.getLong(cursor.getColumnIndex(KEY_TAKER_CALLED_ID));
+		if(firstTakerId>0){
+			round.getTakers().add(new FuturePlayer(firstTakerId));
+			if(secondTakerId>0){
+				round.getTakers().add(new FuturePlayer(secondTakerId));
+			}
+		}
 		Log.d(TAG,"loading round["+round.getId()+"] created at "+new Date(round.getCreationTimestamp()));
 		return round;
 	}

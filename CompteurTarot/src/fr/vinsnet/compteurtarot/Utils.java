@@ -62,6 +62,7 @@ public class Utils {
 
 	public static Game getCurrentGame(Activity a) {
 		Game g  = getCurrentGame(a.getIntent());
+		g.loadFuturePlayerWithGamePlayer();
 		g.loadFuturBid(getBidList(a));
 		return g;
 	}
