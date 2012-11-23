@@ -11,7 +11,7 @@ import fr.vinsnet.compteurtarot.model.PetitAuBout;
 import fr.vinsnet.compteurtarot.model.Player;
 import fr.vinsnet.compteurtarot.model.Poignee;
 import fr.vinsnet.compteurtarot.model.Round;
-import fr.vinsnet.compteurtarot.model.futur.bid.FuturBid;
+import fr.vinsnet.compteurtarot.model.future.bid.FutureBid;
 
 public class RoundParcel extends WithFuturPlayer implements Parcelable {
 
@@ -200,7 +200,7 @@ public class RoundParcel extends WithFuturPlayer implements Parcelable {
 		if (bidType == 0) {
 			round.setbidding(null);
 		} else {
-			round.setbidding(new FuturBid(bidType));
+			round.setbidding(new FutureBid(bidType));
 		}
 	}
 

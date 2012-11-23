@@ -1,4 +1,4 @@
-package fr.vinsnet.compteurtarot.model.futur.player;
+package fr.vinsnet.compteurtarot.model.future.player;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import android.net.Uri;
 import android.util.Log;
 import fr.vinsnet.compteurtarot.model.Player;
 
-public class FuturPlayer extends Player  {
+public class FuturePlayer extends Player  {
 
 	private static final String TAG = "FuturPlayer";
 
@@ -28,8 +28,8 @@ public class FuturPlayer extends Player  {
 		}		
 	}
 	
-	public FuturPlayer(long id) {
-		p = new FakeFuturPlayer();
+	public FuturePlayer(long id) {
+		p = new FakeFuturePlayer();
 		this.id = id;
 	}
 

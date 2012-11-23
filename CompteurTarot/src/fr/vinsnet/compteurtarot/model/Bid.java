@@ -2,7 +2,7 @@ package fr.vinsnet.compteurtarot.model;
 
 import java.util.List;
 
-import fr.vinsnet.compteurtarot.model.futur.bid.OnBidLoaded;
+import fr.vinsnet.compteurtarot.model.future.bid.OnBidLoaded;
 import android.util.Log;
 
 public abstract class Bid implements OnBidLoaded {

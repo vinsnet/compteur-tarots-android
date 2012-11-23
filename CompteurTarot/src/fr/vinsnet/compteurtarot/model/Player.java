@@ -5,7 +5,7 @@ import fr.vinsnet.utils.ObjectWithId;
 
 import java.util.List;
 
-import fr.vinsnet.compteurtarot.model.futur.player.OnPlayerLoaded;
+import fr.vinsnet.compteurtarot.model.future.player.OnPlayerLoaded;
 
 import android.net.Uri;
 

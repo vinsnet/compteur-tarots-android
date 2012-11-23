@@ -1,11 +1,11 @@
-package fr.vinsnet.compteurtarot.model.futur.bid;
+package fr.vinsnet.compteurtarot.model.future.bid;
 
 import java.util.List;
 
 import android.util.Log;
 import fr.vinsnet.compteurtarot.model.Bid;
 
-public class FuturBid extends Bid {
+public class FutureBid extends Bid {
 
 	private static final String TAG = "FuturBid";
 	private Bid b;
@@ -22,8 +22,8 @@ public class FuturBid extends Bid {
 
 	}
 
-	public FuturBid(int type) {
-		this.b = new FakeFuturBid();
+	public FutureBid(int type) {
+		this.b = new FakeFutureBid();
 		this.type = type;
 	}
 

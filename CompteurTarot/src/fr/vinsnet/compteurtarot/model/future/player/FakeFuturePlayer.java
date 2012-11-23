@@ -1,11 +1,11 @@
-package fr.vinsnet.compteurtarot.model.futur.player;
+package fr.vinsnet.compteurtarot.model.future.player;
 
 import java.util.List;
 
 import android.net.Uri;
 import fr.vinsnet.compteurtarot.model.Player;
 
-public class FakeFuturPlayer extends Player {
+public class FakeFuturePlayer extends Player {
 
 	@Override
 	public long getId() {

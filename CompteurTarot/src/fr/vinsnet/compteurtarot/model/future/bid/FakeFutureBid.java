@@ -1,10 +1,10 @@
-package fr.vinsnet.compteurtarot.model.futur.bid;
+package fr.vinsnet.compteurtarot.model.future.bid;
 
 import java.util.List;
 
 import fr.vinsnet.compteurtarot.model.Bid;
 
-public class FakeFuturBid extends Bid {
+public class FakeFutureBid extends Bid {
 
 	
 	@Override

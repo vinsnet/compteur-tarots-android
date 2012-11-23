@@ -13,8 +13,8 @@ import fr.vinsnet.compteurtarot.model.Bid;
 import fr.vinsnet.compteurtarot.model.Game;
 import fr.vinsnet.compteurtarot.model.Player;
 import fr.vinsnet.compteurtarot.model.Round;
-import fr.vinsnet.compteurtarot.model.futur.bid.FuturBid;
-import fr.vinsnet.compteurtarot.model.futur.player.FuturPlayer;
+import fr.vinsnet.compteurtarot.model.future.bid.FutureBid;
+import fr.vinsnet.compteurtarot.model.future.player.FuturePlayer;
 import fr.vinsnet.utils.ObjectWithId;
 
 public class RoundRawDao extends BaseRawDao implements RoundDao {
@@ -130,11 +130,11 @@ public class RoundRawDao extends BaseRawDao implements RoundDao {
 		round.setId(cursor.getLong(cursor.getColumnIndex(KEY_ID)));
 		round.setCreationTimestamp(cursor.getLong(cursor.getColumnIndex(KEY_CREATION_TIME)));
 		round.setUpdateTimestamp(cursor.getLong(cursor.getColumnIndex(KEY_UPDATE_TIME)));
-		round.setbidding(new FuturBid(cursor.getColumnIndex(KEY_BIDDING_TYPE)));
+		round.setbidding(new FutureBid(cursor.getColumnIndex(KEY_BIDDING_TYPE)));
 		round.setNbBoutsTakers(cursor.getInt(cursor.getColumnIndex(KEY_NB_BOUTS_TAKERS)));
 		round.setScoreTakers(cursor.getFloat(cursor.getColumnIndex(KEY_SCORE_TAKERS)));
-		round.getTakers().add(new FuturPlayer(cursor.getLong(cursor.getColumnIndex(KEY_TAKER_ID))));
-		round.getTakers().add(new FuturPlayer(cursor.getLong(cursor.getColumnIndex(KEY_TAKER_CALLED_ID))));
+		round.getTakers().add(new FuturePlayer(cursor.getLong(cursor.getColumnIndex(KEY_TAKER_ID))));
+		round.getTakers().add(new FuturePlayer(cursor.getLong(cursor.getColumnIndex(KEY_TAKER_CALLED_ID))));
 		//game is set when added to game;
 		Log.d(TAG,"loading round["+round.getId()+"] created at "+new Date(round.getCreationTimestamp()));
 		return round;

@@ -3,8 +3,8 @@ package fr.vinsnet.compteurtarot.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.vinsnet.compteurtarot.model.futur.bid.OnBidLoaded;
-import fr.vinsnet.compteurtarot.model.futur.player.OnPlayerLoaded;
+import fr.vinsnet.compteurtarot.model.future.bid.OnBidLoaded;
+import fr.vinsnet.compteurtarot.model.future.player.OnPlayerLoaded;
 import fr.vinsnet.utils.ObjectWithId;
 
 
