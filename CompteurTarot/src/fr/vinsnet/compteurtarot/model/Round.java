@@ -146,6 +146,7 @@ public class Round implements ObjectWithId,OnPlayerLoaded,OnBidLoaded {
 		loadBonusPlayer(players);
 	}
 	public void loadWithBids(List<Bid> bids) {
+		if(bidding==null)return;
 		bidding.loadWithBids(bids);
 	}
 
