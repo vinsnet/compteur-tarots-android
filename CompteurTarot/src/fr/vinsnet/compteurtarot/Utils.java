@@ -61,7 +61,9 @@ public class Utils {
 	}
 
 	public static Game getCurrentGame(Activity a) {
-		return getCurrentGame(a.getIntent());
+		Game g  = getCurrentGame(a.getIntent());
+		g.loadFuturBid(getBidList(a));
+		return g;
 	}
 	
 	public static Game getCurrentGame(Intent intent) {
@@ -70,13 +72,15 @@ public class Utils {
 	}
 	
 	public static Round getCurrentRound(Activity a, List<Player> players) {
-		return  getCurrentRound(a.getIntent(),players);
+		Round r =  getCurrentRound(a.getIntent(),players);
+		r.loadWithBids(getBidList(a));
+		return r;
 	}
 	
 	public static Round getCurrentRound(Intent intent, List<Player> players){
 		Round round = ((RoundParcel) intent.getExtras()
 				.getParcelable(CURRENT_ROUND_PARCEL_NAME)).getRound();
-		 round.loadPlayers(players);
+		 round.loadWithPlayers(players);
 		return round;
 	}
 
@@ -155,6 +159,25 @@ public class Utils {
 		
 	}
 
+	public static List<Bid> getBidList(Context context) {
+		// TODO read Bids config From DB
+		// TODO only the name in configuration files
+		
+		Resources res = context.getResources();
+		String[] bidNames = res.getStringArray(R.array.bidName);
+		int[] bidValues = res.getIntArray(R.array.bidValue);
+		int[] bidMultiply = res.getIntArray(R.array.bidMultiply);
+
+		List<Bid> bids = new ArrayList<Bid>(bidNames.length);
+		for (int i = 0; i < bidNames.length; i++) {
+			Bid b = Bid.instanciateFromBidType(i + 1);
+			b.setName(bidNames[i]);
+			b.setValue(bidValues[i]);
+			b.setMultiply(bidMultiply[i]);
+			bids.add(b);
+		}
+		return bids;
+	}
 
 
 

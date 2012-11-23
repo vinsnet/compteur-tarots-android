@@ -81,9 +81,16 @@ public class Game  implements ObjectWithId{
 		round.setGame(this);
 	}
 
-	public void loadFuturePlayerInAllRounds(List<Player> players) {
+	public void loadFuturePlayerWithGamePlayer() {
 		for(Round r : getRounds()){
-			r.loadPlayers(players);
+			r.loadWithPlayers(players);
+		}
+		
+	}
+
+	public void loadFuturBid(List<Bid> bidList) {
+		for(Round r : getRounds()){
+			r.loadWithBids(bidList);
 		}
 		
 	}

@@ -2,7 +2,7 @@ package fr.vinsnet.compteurtarot.parcels;
 
 import android.os.Parcel;
 import fr.vinsnet.compteurtarot.model.Player;
-import fr.vinsnet.compteurtarot.model.futur.FuturPlayer;
+import fr.vinsnet.compteurtarot.model.futur.player.FuturPlayer;
 
 public class WithFuturPlayer {
 

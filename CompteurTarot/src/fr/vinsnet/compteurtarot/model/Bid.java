@@ -1,8 +1,11 @@
 package fr.vinsnet.compteurtarot.model;
 
+import java.util.List;
+
+import fr.vinsnet.compteurtarot.model.futur.bid.OnBidLoaded;
 import android.util.Log;
 
-public abstract class Bid {
+public abstract class Bid implements OnBidLoaded {
 
 	private static final String TAG = "Bid";
 	private String name;
@@ -46,6 +49,10 @@ public abstract class Bid {
 			return null;
 		}
 		
+	}
+	
+	public void loadWithBids(List<Bid> bids) {
+		//nothing to do, (see futurBid)
 	}
 	
 }

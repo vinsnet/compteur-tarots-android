@@ -1,4 +1,4 @@
-package fr.vinsnet.compteurtarot.model.futur;
+package fr.vinsnet.compteurtarot.model.futur.player;
 
 import java.util.List;
 
@@ -25,8 +25,7 @@ public class FuturPlayer extends Player  {
 				this.p=p;
 				break;
 			}
-		}
-		
+		}		
 	}
 	
 	public FuturPlayer(long id) {
@@ -36,19 +35,23 @@ public class FuturPlayer extends Player  {
 
 	
 	
-	
-	///////////////////////////////////////
-	//        delegate methods to p      //
-	///////////////////////////////////////
-	
-	
 	public boolean equals(Object o) {
-		return p.equals(o);
+		if (o instanceof Player) {
+			Player p = (Player) o;
+			return p.getId() == id;
+		}
+		return false;
 	}
 
 	public long getId() {
 		return id;
 	}
+	
+	///////////////////////////////////////
+	//        delegate methods to p      //
+	///////////////////////////////////////
+	
+
 
 	public void setId(long id) {
 		p.setId(id);

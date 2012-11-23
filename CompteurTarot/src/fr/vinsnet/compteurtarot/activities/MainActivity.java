@@ -51,7 +51,7 @@ public class MainActivity extends Activity {
 	 
 	 
 	 public void resumeGame(View view){
-		 	Game currentGame = Utils.getGameDao(getApplicationContext()).loadLastGame();
+		 	Game currentGame = Utils.getGameDao(getApplicationContext()).loadLastGame(this);
 	        Utils.displayGame(this, currentGame);
 	    }
 	 public void eraseData(View view){

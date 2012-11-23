@@ -1,4 +1,4 @@
-package fr.vinsnet.compteurtarot.model.futur;
+package fr.vinsnet.compteurtarot.model.futur.player;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ public interface OnPlayerLoaded {
 	/**
 	 * methode to start load FuturPlayer
 	 * 
-	 * @param g
+	 * @param player list of loaded players
 	 */
-	public abstract void loadWithPlayers(List<Player> g);
+	public void loadWithPlayers(List<Player> players);
 
 }

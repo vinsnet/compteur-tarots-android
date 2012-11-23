@@ -1,5 +1,6 @@
 package fr.vinsnet.compteurtarot.dao;
 
+import android.content.Context;
 import fr.vinsnet.compteurtarot.model.Game;
 
 public interface GameDao {
@@ -8,9 +9,11 @@ public interface GameDao {
 
 	public boolean hasSavedGame();
 
-	public Game loadLastGame();
+	//XXX context should be removed when bid will be moved in dao
+	public Game loadLastGame(Context c);
 
-	public Game loadGame(long id);
+	//XXX context should be removed when bid will be moved in dao
+	public Game loadGame(long id,Context c);
 
 
 	

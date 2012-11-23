@@ -1,4 +1,4 @@
-package fr.vinsnet.compteurtarot.model.futur;
+package fr.vinsnet.compteurtarot.model.futur.player;
 
 import java.util.List;
 

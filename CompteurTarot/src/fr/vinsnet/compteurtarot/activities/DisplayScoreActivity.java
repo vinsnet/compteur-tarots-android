@@ -165,7 +165,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 protected void reloadCurrentGame() {
 	Log.v(TAG,"reloadCurrentGame");
-	currentGame = Utils.getGameDao(this).loadGame(currentGame.getId());
+	currentGame = Utils.getGameDao(this).loadGame(currentGame.getId(),this);
 	
 }
 }

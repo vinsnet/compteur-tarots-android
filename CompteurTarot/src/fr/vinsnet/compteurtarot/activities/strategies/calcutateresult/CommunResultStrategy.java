@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.Log;
 import fr.vinsnet.compteurtarot.R;
+import fr.vinsnet.compteurtarot.Utils;
 import fr.vinsnet.compteurtarot.model.Bid;
 import fr.vinsnet.compteurtarot.model.Bonus;
 import fr.vinsnet.compteurtarot.model.DoublePoignee;
@@ -186,21 +187,9 @@ public abstract class CommunResultStrategy implements ResultStrategy {
 
 	
 	public List<Bid> getBidList(Context context) {
+		return Utils.getBidList(context);
 		//TODO read Bids config From DB
 		//TODO only the name in configuration files
-		Resources res = context.getResources();
-		String[] bidNames = res.getStringArray(R.array.bidName);
-		int[] bidValues = res.getIntArray(R.array.bidValue);
-		int[] bidMultiply = res.getIntArray(R.array.bidMultiply);
 		
-		List<Bid> bids = new ArrayList<Bid>(bidNames.length);
-		for(int i=0;i<bidNames.length;i++){
-			Bid b = Bid.instanciateFromBidType(i+1);
-			b.setName(bidNames[i]);
-			b.setValue(bidValues[i]);
-			b.setMultiply(bidMultiply[i]);
-			bids.add(b);
-		}
-		return bids;
 	}
 }

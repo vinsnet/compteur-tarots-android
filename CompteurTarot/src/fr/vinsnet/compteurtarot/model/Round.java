@@ -3,10 +3,12 @@ package fr.vinsnet.compteurtarot.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.vinsnet.compteurtarot.model.futur.bid.OnBidLoaded;
+import fr.vinsnet.compteurtarot.model.futur.player.OnPlayerLoaded;
 import fr.vinsnet.utils.ObjectWithId;
 
 
-public class Round implements ObjectWithId {
+public class Round implements ObjectWithId,OnPlayerLoaded,OnBidLoaded {
 
 	private static final int NB_BOUTS = 3;
 	public static final int MAX_SCORE= 91;
@@ -137,15 +139,14 @@ public class Round implements ObjectWithId {
 		return bidding==null;
 	}
 
-	/**
-	 * ask to all FuturPlayers to be loaded
-	 */
-	public void loadPlayers(List<Player> players) {
-		
+
+	public void loadWithPlayers(List<Player> players) {
 		loadTakerAndDefenders(players);
-		
 		loadPoigneesPlayer(players);
 		loadBonusPlayer(players);
+	}
+	public void loadWithBids(List<Bid> bids) {
+		bidding.loadWithBids(bids);
 	}
 
 	protected void loadPoigneesPlayer(List<Player> players) {

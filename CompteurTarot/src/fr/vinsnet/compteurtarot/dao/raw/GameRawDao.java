@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import fr.vinsnet.compteurtarot.Utils;
 import fr.vinsnet.compteurtarot.dao.GameDao;
 import fr.vinsnet.compteurtarot.model.Game;
 import fr.vinsnet.compteurtarot.model.Player;
@@ -124,7 +125,7 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 		return c;
 	}
 
-	public Game loadLastGame() {
+	public Game loadLastGame(Context c) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Game g = null;
 		try {
@@ -134,6 +135,21 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 			g = new Game();
 		}
 		db.close();
+		g.loadFuturBid(Utils.getBidList(c));
+		return g;
+	}
+	
+	public Game loadGame(long id,Context c) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Game g = null;
+		try {
+			g = loadGame(id, db);
+		} catch (Exception e) {
+			Log.e(TAG, "erreur au chargement");
+			g = new Game();
+		}
+		db.close();
+		g.loadFuturBid(Utils.getBidList(c));
 		return g;
 	}
 
@@ -169,7 +185,7 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 		//TODO faire des tests pour verifier que game n'est pas remis a null
 		loadGamePlayers(game,db);
 		loadGameRounds(game,db);
-		game.loadFuturePlayerInAllRounds(game.getPlayers());
+		game.loadFuturePlayerWithGamePlayer();
 		return game;
 	}
 	
@@ -306,18 +322,7 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 		return super.updateOrCreate(g);
 	}
 
-	public Game loadGame(long id) {
-		SQLiteDatabase db = this.getReadableDatabase();
-		Game g = null;
-		try {
-			g = loadGame(id, db);
-		} catch (Exception e) {
-			Log.e(TAG, "erreur au chargement");
-			g = new Game();
-		}
-		db.close();
-		return g;
-	}
+
 
 
 }

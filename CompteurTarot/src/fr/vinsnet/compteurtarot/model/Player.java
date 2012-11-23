@@ -5,7 +5,7 @@ import fr.vinsnet.utils.ObjectWithId;
 
 import java.util.List;
 
-import fr.vinsnet.compteurtarot.model.futur.OnPlayerLoaded;
+import fr.vinsnet.compteurtarot.model.futur.player.OnPlayerLoaded;
 
 import android.net.Uri;
 
@@ -21,6 +21,7 @@ public class Player implements OnPlayerLoaded,ObjectWithId  {
 	
 
 	public void loadWithPlayers(List<Player> g) {
+		//nothing to do (see futurPlayer)
 	}
 	
 	
