@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.util.Log;
 import android.view.LayoutInflater;
 import fr.vinsnet.compteurtarot.activities.AddRoundActivity;
 import fr.vinsnet.compteurtarot.activities.ChooseContactActivity;
@@ -42,9 +41,6 @@ public class Utils {
 	public static final int DIALOG_CHOOSE_PLAYER = R.layout.dialog_choose_player;
 
 	public static final int NEW_ROUND_REQUEST_CODE = 1;
-
-	private static final String TAG = "UTILS";
-
 
 	
 	public static void startNewGame(Context c) {

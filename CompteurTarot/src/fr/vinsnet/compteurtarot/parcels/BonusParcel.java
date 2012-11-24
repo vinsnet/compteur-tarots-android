@@ -7,7 +7,6 @@ import fr.vinsnet.compteurtarot.model.Bonus;
 import fr.vinsnet.compteurtarot.model.JeuBlancAtout;
 import fr.vinsnet.compteurtarot.model.JeuBlancTete;
 import fr.vinsnet.compteurtarot.model.Penalty;
-import fr.vinsnet.compteurtarot.model.future.player.FuturePlayer;
 
 public class BonusParcel extends WithFuturPlayer implements Parcelable {
 

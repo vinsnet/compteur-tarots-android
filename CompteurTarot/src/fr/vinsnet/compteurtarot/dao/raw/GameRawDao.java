@@ -48,16 +48,7 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 			+ PlayerRawDao.TABLE_NAME + " on delete restrict" +
 
 			");";
-/*	private static final String GAME_ROUND_TABLE_CREATE = "CREATE TABLE "
-			+ JOIN_ROUND_TABLE_NAME + " (" + KEY_ID
-			+ " integer primary key autoincrement, " + KEY_ID_GAME
-			+ " integer constraint fk_game references " + TABLE_NAME
-			+ " on delete cascade, " + KEY_ID_ROUND
-			+ " integer constraint fk_player references "
-			+ RoundRawDao.TABLE_NAME + " " +
 
-			");";
-*/
 	private PlayerRawDao playerDao;
 
 	private RoundRawDao roundDao;
@@ -100,12 +91,7 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 		c.put(KEY_ID_PLAYER, p.getId());
 		return c;
 	}
-	private ContentValues getGameRoundJoinValues(Game g, Round r) {
-		ContentValues c = new ContentValues();
-		c.put(KEY_ID_GAME, g.getId());
-		c.put(KEY_ID_PLAYER, r.getId());
-		return c;
-	}
+
 
 	private void cleanPlayerGameJoin(Game g, SQLiteDatabase db) {
 		if (g.getId() == 0) {

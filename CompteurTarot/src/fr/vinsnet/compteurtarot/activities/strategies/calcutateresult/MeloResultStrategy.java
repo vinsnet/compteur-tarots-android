@@ -2,7 +2,6 @@ package fr.vinsnet.compteurtarot.activities.strategies.calcutateresult;
 
 import java.util.List;
 
-import fr.vinsnet.compteurtarot.R.string;
 import fr.vinsnet.compteurtarot.model.Bid;
 import fr.vinsnet.compteurtarot.model.PetitAuBout;
 import fr.vinsnet.compteurtarot.model.Player;

@@ -10,7 +10,7 @@ public abstract class Poignee {
 	}
 
 	private Player player;
-	@SuppressWarnings("unused")
+	
 	private long id;
 	
 	

@@ -1,14 +1,11 @@
 package fr.vinsnet.compteurtarot.activities.strategies.calcutateresult;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.util.Log;
-import fr.vinsnet.compteurtarot.R;
 import fr.vinsnet.compteurtarot.Utils;
 import fr.vinsnet.compteurtarot.model.Bid;
 import fr.vinsnet.compteurtarot.model.Bonus;
