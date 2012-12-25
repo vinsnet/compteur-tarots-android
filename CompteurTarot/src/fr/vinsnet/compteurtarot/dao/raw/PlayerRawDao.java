@@ -25,7 +25,6 @@ public class PlayerRawDao extends BaseRawDao implements PlayerDao {
 	private static final String TAG = "PlayerRawDao";
 	static final String TABLE_NAME = "players";
 
-	private static final String KEY_ID = "id";
 	private static final String KEY_NAME = "name";
 	private static final String KEY_CONTACT_ID = "contact_id";
 	private static final String KEY_CONTACT_URI = "contact_uri";

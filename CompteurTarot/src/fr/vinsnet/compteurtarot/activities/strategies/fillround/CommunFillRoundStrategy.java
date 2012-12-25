@@ -142,7 +142,7 @@ return getCurrentRound().getDefenders().size()!=0;
 	}
 	
 	public void addBonus(Bonus b) {
-		getCurrentRound().getBonus().add(b);
+		getCurrentRound().addBonus(b);
 		bonusUpdated();
 	}
 

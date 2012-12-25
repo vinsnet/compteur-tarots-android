@@ -149,7 +149,7 @@ public class RoundParcel extends WithFuturPlayer implements Parcelable {
 	private void readBonus(Parcel source) {
 		int size = source.readInt();
 		for (int i = 0; i < size; i++) {
-			round.getBonus().add(readOneBonus(source));
+			round.addBonus(readOneBonus(source));
 		}
 	}
 

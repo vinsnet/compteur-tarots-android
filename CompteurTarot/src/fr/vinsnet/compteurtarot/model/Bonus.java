@@ -10,10 +10,14 @@
  ******************************************************************************/
 package fr.vinsnet.compteurtarot.model;
 
-public abstract class Bonus {
- private long id;
+import fr.vinsnet.utils.ObjectWithId;
+
+
+public abstract class Bonus implements ObjectWithId{
+private long id;
  private int value;
  private Player player;
+private Round round;
  
 public Bonus(long id, int value, Player player) {
 	this.id = id;
@@ -38,10 +42,17 @@ public Player getPlayer() {
 public void setPlayer(Player player) {
 	this.player = player;
 }
-
+public void setRound(Round round) {
+	this.round= round;
+}
+public Round getRound(){
+	return round;
+}
 
 
 public abstract int getType();
 public abstract String getLabel();
+
+
  
 }

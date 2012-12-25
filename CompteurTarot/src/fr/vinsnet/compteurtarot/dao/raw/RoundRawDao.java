@@ -20,6 +20,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import fr.vinsnet.compteurtarot.dao.RoundDao;
 import fr.vinsnet.compteurtarot.model.Bid;
+import fr.vinsnet.compteurtarot.model.Bonus;
 import fr.vinsnet.compteurtarot.model.Game;
 import fr.vinsnet.compteurtarot.model.Player;
 import fr.vinsnet.compteurtarot.model.Round;
@@ -32,7 +33,6 @@ public class RoundRawDao extends BaseRawDao implements RoundDao {
 	private static final String TAG = "RoundRawDao";
 	public static final String TABLE_NAME = "rounds";
 
-	private static final String KEY_ID = "id";
 	private static final String KEY_GAME_ID = "game_id";
 	private static final String KEY_CREATION_TIME = "creation_time";
 	private static final String KEY_UPDATE_TIME = "update_time";
@@ -56,10 +56,14 @@ public class RoundRawDao extends BaseRawDao implements RoundDao {
 			KEY_TAKER_CALLED_ID + " integer constraint fk_game references " + PlayerRawDao.TABLE_NAME + /*", "+
 			
 			*/" );";
+	
+	
+	private BonusRawDao bonusDao;
 
 
 	public RoundRawDao(Context context) {
 		super(context);
+		this.bonusDao = new BonusRawDao(context);
 	}
 
 	@Override
@@ -103,6 +107,11 @@ public class RoundRawDao extends BaseRawDao implements RoundDao {
 			r.setUpdateTimestamp(new Date().getTime());//XXX laisser la base faire ca
 			/*int nbLineUpdated =*/ db.update(TABLE_NAME, getRoundBaseValues(r),KEY_ID+"=?",new String[]{""+r.getId()});
 
+		}
+		
+		for(Bonus b : r.getBonus()){
+			//TODO test if ok
+					bonusDao.updateOrCreate(b, db);
 		}
 		return r.getId();
 	}

@@ -11,6 +11,7 @@
 package fr.vinsnet.compteurtarot.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import fr.vinsnet.compteurtarot.model.future.bid.OnBidLoaded;
@@ -115,9 +116,15 @@ public class Round implements ObjectWithId,OnPlayerLoaded,OnBidLoaded {
 	}
 
 	public List<Bonus> getBonus() {
-		return bonus;
+		return Collections.unmodifiableList(bonus);
 	}
 
+	public void addBonus(Bonus b){
+		bonus.add(b);
+		b.setRound(this);
+	}
+	
+	
 	public void setbidding(Bid bidding) {
 		this.bidding = bidding;
 		

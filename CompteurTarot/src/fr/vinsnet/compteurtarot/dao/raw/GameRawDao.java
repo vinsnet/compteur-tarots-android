@@ -26,7 +26,6 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 
 	static final String TABLE_NAME = "games";
 
-	private static final String KEY_ID = "id";
 
 	private static final String KEY_STARTTIME = "startTime";
 
@@ -294,7 +293,6 @@ public class GameRawDao extends BaseRawDao implements GameDao {
 			}
 
 			for(Round r : g.getRounds()){
-				roundDao.updateOrCreate(r, db);
 				insertFailed |= !roundDao.updateOrCreate(r, db);
 		
 			}
