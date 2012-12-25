@@ -18,6 +18,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import fr.vinsnet.compteurtarot.dao.BonusDao;
 import fr.vinsnet.compteurtarot.dao.RoundDao;
 import fr.vinsnet.compteurtarot.model.Bid;
 import fr.vinsnet.compteurtarot.model.Bonus;
@@ -166,11 +167,22 @@ public class RoundRawDao extends BaseRawDao implements RoundDao {
 				round.getTakers().add(new FuturePlayer(secondTakerId));
 			}
 		}
+		loadAllBonusForRound(round,db);
 		Log.d(TAG,"loading round["+round.getId()+"] created at "+new Date(round.getCreationTimestamp()));
+		
+		
 		return round;
 	}
 
 	
+	protected void loadAllBonusForRound(Round r , SQLiteDatabase db) {
+		List<Bonus> bonus = bonusDao.loadBonusForRound(r, db);
+		for (Bonus b  : bonus){
+			r.addBonus(b);
+		}
+		
+	}
+
 	public void loadRoundsForGame(Game game, SQLiteDatabase db) {
 		Log.v(TAG,"loadRoundForGame"); 
 		Cursor cursor = null;
