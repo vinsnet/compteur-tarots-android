@@ -77,6 +77,8 @@ public class RoundRawDao extends BaseRawDao implements RoundDao {
 		
 		db.execSQL(ROUND_TABLE_CREATE);
 		
+		bonusDao.onCreate(db);
+		
 	}
 
 	@Override
