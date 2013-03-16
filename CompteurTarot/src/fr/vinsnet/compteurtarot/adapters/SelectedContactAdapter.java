@@ -15,16 +15,20 @@ import java.util.List;
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
-import fr.vinsnet.compteurtarot.Utils;
+import fr.vinsnet.compteurtarot.R;
 import fr.vinsnet.compteurtarot.model.Player;
 import fr.vinsnet.compteurtarot.views.ContactView;
 import fr.vinsnet.utils.adapters.SimpleListAdapter;
 
-public class SelectedContactAdapter extends SimpleListAdapter<Player> {
 
 
-
-	
+ /**
+ * @author vinsnet
+ *
+ *	adapter fonctionnant avec le layout ViewContact
+ *
+ */
+public class SelectedContactAdapter extends SimpleListAdapter<Player> { 
 	
 	private static final String TAG = "SelectedContactAdapter";
 	public SelectedContactAdapter(Activity context,List<Player> list) {
@@ -34,7 +38,7 @@ public class SelectedContactAdapter extends SimpleListAdapter<Player> {
 
 	@Override
 	protected int getItemLayoutId() {
-		return Utils.CONTACT_VIEW_ID;
+		return R.layout.view_contact;
 	}
 
 	@Override

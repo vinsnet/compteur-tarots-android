@@ -44,7 +44,6 @@ public class Utils {
 
 	private static final String CURRENT_ROUND_PARCEL_NAME = "fr.vinsnet.CompteurTarot.currentRound";
 	
-	public static final int CONTACT_VIEW_ID = R.layout.view_contact;
 
 	public static final int BIDDING_SPINNER_VIEW_ID = R.layout.view_bidding_spinner;
 
@@ -128,7 +127,7 @@ public class Utils {
 
 		LayoutInflater inflater = (LayoutInflater)context.getSystemService
 			      (Context.LAYOUT_INFLATER_SERVICE);
-		ContactView view = (ContactView)inflater.inflate(Utils.CONTACT_VIEW_ID,null);
+		ContactView view = (ContactView)inflater.inflate(R.layout.view_contact,null);
 		view.setPlayer(p);
 		return view;
 	}

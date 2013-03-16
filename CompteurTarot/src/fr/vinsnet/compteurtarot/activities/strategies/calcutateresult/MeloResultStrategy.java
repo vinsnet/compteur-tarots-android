@@ -41,7 +41,7 @@ public class MeloResultStrategy extends CommunResultStrategy {
 		if(pab==null){
 			return 0;
 		}
-			return (pab.isForTakers()?1:-1)*(isSuccess()?1:-1)*10;
+		return 10;
 		
 		
 	}

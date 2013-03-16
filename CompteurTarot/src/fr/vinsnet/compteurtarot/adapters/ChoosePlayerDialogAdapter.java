@@ -16,7 +16,7 @@ import android.app.Activity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListAdapter;
-import fr.vinsnet.compteurtarot.Utils;
+import fr.vinsnet.compteurtarot.R;
 import fr.vinsnet.compteurtarot.model.Player;
 import fr.vinsnet.compteurtarot.views.ChoosePlayerDialog.OnPlayerChosenListener;
 import fr.vinsnet.compteurtarot.views.ContactView;
@@ -36,7 +36,7 @@ public class ChoosePlayerDialogAdapter extends SimpleListAdapter<Player>
 
 	@Override
 	protected int getItemLayoutId() {
-		return Utils.CONTACT_VIEW_ID;
+		return R.layout.view_contact;
 	}
 
 	@Override

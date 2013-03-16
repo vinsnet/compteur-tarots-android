@@ -49,10 +49,11 @@ public class ChoosePlayerDialog extends LinearLayout{
 	}
 	
 	public void setPlayerList(List<Player> players){
-		getPlayergrid().setAdapter(new ChoosePlayerDialogAdapter( (Activity) getContext(),players,listener));
+		getPlayerGrid().setAdapter(new ChoosePlayerDialogAdapter( (Activity) getContext(),players,listener));
+		
 	}
 	
-	public GridView getPlayergrid(){
+	public GridView getPlayerGrid(){
 		return (GridView) findViewById(R.id.cpd_player_grid);
 	}
 	
@@ -66,9 +67,9 @@ public class ChoosePlayerDialog extends LinearLayout{
 
 	public AlertDialog getAlertDialog() {
 		if(alertDialog==null){
-		Builder builder = new AlertDialog.Builder(getContext());
-		builder.setView(this);
-		this.alertDialog= builder.create();
+			Builder builder = new AlertDialog.Builder(getContext());
+			builder.setView(this);
+			this.alertDialog= builder.create();
 		}
 		return alertDialog;
 	}
