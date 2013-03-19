@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vtc:Application
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:vtc="androidgen.vinsnet.fr"
+    xsi:schemaLocation="androidgen.vinsnet.fr ../../androidgen/model/application.ecore"
+    nom="CompteurTarots"
+    package="fr.vinsnet.tarots.android"
+    minSdkVersion="10"
+    targetSdkVersion="17">
+  <propose nom="Accueil"
+      nomCourt="main"/>
+  <propose nom="Parametrage Partie"
+      nomCourt="param_game"/>
+  <propose nom="Partie en cours"
+      nomCourt="game"/>
+  <gere nom="Game"/>
+  <gere nom="Round"/>
+  <gere nom="Poignee"
+      isAbstract="true">
+    <spécifié
+        nom="SimplePoignee"/>
+    <spécifié
+        nom="DoublePoignee"/>
+    <spécifié
+        nom="TriplePoignee"/>
+  </gere>
+</vtc:Application>
